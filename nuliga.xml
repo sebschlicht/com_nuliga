@@ -12,7 +12,7 @@
     <!-- <license>License Info</license> -->
 
     <!--  The version string is recorded in the components table -->
-    <version>0.0.6</version>
+    <version>0.0.7</version>
 
     <!-- The description is optional and defaults to the name -->
     <description>Import tables from nuLiga to your website.</description>
@@ -57,10 +57,12 @@
             <!-- Admin Main File Copy Section -->
             <filename>index.html</filename>
             <filename>nuliga.php</filename>
+            <filename>controller.php</filename>
 
             <folder>sql</folder>
             <folder>models</folder>
             <folder>tables</folder>
+            <folder>views</folder>
         </files>
     </administration>
 
