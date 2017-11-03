@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.2.0" method="upgrade">
 
-    <name>NuLiga</name>
+    <name>COM_NULIGA</name>
 
     <!-- The following elements are optional and free of formatting constraints -->
     <creationDate>Nov 2017</creationDate>
@@ -12,10 +12,10 @@
     <!-- <license>License Info</license> -->
 
     <!--  The version string is recorded in the components table -->
-    <version>0.0.7</version>
+    <version>0.0.8</version>
 
     <!-- The description is optional and defaults to the name -->
-    <description>Import tables from nuLiga to your website.</description>
+    <description>COM_NULIGA_DESCRIPTION</description>
 
     <install> <!-- Runs on install -->
         <sql>
@@ -44,7 +44,11 @@
 
         <folder>views</folder>
         <folder>models</folder>
+        <folder>language</folder>
     </files>
+    <languages folder="site/language">
+        <language tag="en-GB">en-GB/en-GB.com_nuliga.ini</language>
+    </languages>
 
     <administration>
         <!-- Administration Menu Section -->
@@ -63,7 +67,12 @@
             <folder>models</folder>
             <folder>tables</folder>
             <folder>views</folder>
+            <folder>language</folder>
         </files>
+        <languages folder="admin/language">
+            <language tag="en-GB">en-GB/en-GB.com_nuliga.ini</language>
+            <language tag="en-GB">en-GB/en-GB.com_nuliga.sys.ini</language>
+        </languages>
     </administration>
 
 </extension>
