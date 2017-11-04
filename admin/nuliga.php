@@ -9,11 +9,11 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-// Get an instance of the controller prefixed by NuLiga
+// get NuLiga controller instance
 $controller = JControllerLegacy::getInstance('NuLiga');
 
-// Perform the Request task
+// perform requested task
 $controller->execute(JFactory::getApplication()->input->get('task'));
 
-// Redirect if set by the controller
+// redirect if requested by controller
 $controller->redirect();

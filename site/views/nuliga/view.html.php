@@ -10,25 +10,27 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * HTML View class for the NuLiga Component
+ * NuLiga table view.
  *
+ * @package     Joomla.Site
+ * @subpackage  com_nuliga
  * @since  0.0.2
  */
 class NuLigaViewNuLiga extends JViewLegacy
 {
     /**
-     * Display the NuLiga view
+     * Displays the NuLiga table view.
      *
-     * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+     * @param   string  $tpl  template file name to parse; automatically searches through template paths
      *
      * @return  void
      */
     function display($tpl = null)
     {
-        // Assign data to the view
+        // assign view data
         $this->msg = $this->get('Msg');
 
-        // Check for errors.
+        // check for errors
         if (count($errors = $this->get('Errors')))
         {
             JLog::add(implode('<br />', $errors), JLog::WARNING, 'jerror');
@@ -36,7 +38,7 @@ class NuLigaViewNuLiga extends JViewLegacy
             return false;
         }
 
-        // Display the view
+        // display template
         parent::display($tpl);
     }
 }

@@ -10,8 +10,10 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * NuLiga Model
+ * Model for NuLiga single tables.
  *
+ * @package     Joomla.Site
+ * @subpackage  com_nuliga
  * @since  0.0.4
  */
 class NuLigaModelNuLiga extends JModelItem
@@ -24,11 +26,11 @@ class NuLigaModelNuLiga extends JModelItem
     /**
      * Method to get a table object, load it if necessary.
      *
-     * @param   string  $type    The table name. Optional.
-     * @param   string  $prefix  The class prefix. Optional.
-     * @param   array   $config  Configuration array for model. Optional.
+     * @param   string  $type    [table name]
+     * @param   string  $prefix  [class prefix]
+     * @param   array   $config  [configuration array]
      *
-     * @return  JTable  A JTable object
+     * @return  JTable  table object
      *
      * @since   1.6
      */
@@ -38,11 +40,11 @@ class NuLigaModelNuLiga extends JModelItem
     }
 
     /**
-     * Get the message
+     * Get the message of a greeting.
      *
-     * @param   integer  $id  Greeting Id
+     * @param   integer  $id  greeting id
      *
-     * @return  string        Fetched String from Table for relevant Id
+     * @return  string        greeting message
      */
     public function getMsg($id = 1)
     {
@@ -53,17 +55,17 @@ class NuLigaModelNuLiga extends JModelItem
 
         if (!isset($this->messages[$id]))
         {
-            // Request the selected id
+            // get requested id
             $jinput = JFactory::getApplication()->input;
             $id     = $jinput->get('id', 1, 'INT');
 
-            // Get a TableNuLiga instance
+            // get a TableNuLiga instance
             $table = $this->getTable();
 
-            // Load the message
+            // load NuLiga table
             $table->load($id);
 
-            // Assign the message
+            // store greeting message
             $this->messages[$id] = $table->greeting;
         }
 

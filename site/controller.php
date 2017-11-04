@@ -10,8 +10,10 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * NuLiga Component Controller
+ * Main frontend controller of the NuLiga component.
  *
+ * @package     Joomla.Site
+ * @subpackage  com_nuliga
  * @since  0.0.2
  */
 class NuLigaController extends JControllerLegacy
