@@ -8,8 +8,24 @@
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
+
+JHtml::_('formbehavior.chosen', 'select');
+
+$listOrder     = $this->escape($this->filter_order);
+$listDirn      = $this->escape($this->filter_order_Dir);
 ?>
-<form action="index.php?option=com_nuliga&view=nuliga" method="post" id="adminForm" name="adminForm">
+<form action="index.php?option=com_nuliga&view=nuligas" method="post" id="adminForm" name="adminForm">
+    <div class="row-fluid">
+        <div class="span6">
+            <?php echo JText::_('COM_NULIGA_NULIGAS_FILTER'); ?>
+            <?php
+            echo JLayoutHelper::render(
+                'joomla.searchtools.default',
+                array('view' => $this)
+            );
+            ?>
+        </div>
+    </div>
     <table class="table table-striped table-hover">
         <thead>
         <tr>
@@ -18,13 +34,13 @@ defined('_JEXEC') or die('Restricted Access');
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
             <th width="90%">
-                <?php echo JText::_('COM_NULIGA_NULIGAS_NAME') ;?>
+                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_NAME', 'greeting', $listDirn, $listOrder); ?>
             </th>
             <th width="5%">
-                <?php echo JText::_('COM_NULIGA_PUBLISHED'); ?>
+                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_PUBLISHED', 'published', $listDirn, $listOrder); ?>
             </th>
             <th width="2%">
-                <?php echo JText::_('COM_NULIGA_ID'); ?>
+                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_ID', 'id', $listDirn, $listOrder); ?>
             </th>
         </tr>
         </thead>
@@ -66,5 +82,7 @@ defined('_JEXEC') or die('Restricted Access');
     </table>
     <input type="hidden" name="task" value=""/>
     <input type="hidden" name="boxchecked" value="0"/>
+    <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
+    <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
     <?php echo JHtml::_('form.token'); ?>
 </form>

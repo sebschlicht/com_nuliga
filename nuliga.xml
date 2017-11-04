@@ -12,7 +12,7 @@
     <!-- <license>License Info</license> -->
 
     <!--  The version string is recorded in the components table -->
-    <version>0.0.9</version>
+    <version>0.0.10</version>
 
     <!-- The description is optional and defaults to the name -->
     <description>COM_NULIGA_DESCRIPTION</description>
@@ -48,11 +48,12 @@
     </files>
     <languages folder="site/language">
         <language tag="en-GB">en-GB/en-GB.com_nuliga.ini</language>
+        <language tag="de-DE">de-DE/de-DE.com_nuliga.ini</language>
     </languages>
 
     <administration>
         <!-- Administration Menu Section -->
-        <menu link='index.php?option=com_nuliga'>nuLiga</menu>
+        <menu link='index.php?option=com_nuliga'>COM_NULIGA_MENU</menu>
         <!-- Administration Main File Copy Section -->
         <!-- Note the folder attribute: This attribute describes the folder
             to copy FROM in the package to install therefore files copied
@@ -73,6 +74,8 @@
         <languages folder="admin/language">
             <language tag="en-GB">en-GB/en-GB.com_nuliga.ini</language>
             <language tag="en-GB">en-GB/en-GB.com_nuliga.sys.ini</language>
+            <language tag="de-DE">de-DE/de-DE.com_nuliga.ini</language>
+            <language tag="de-DE">de-DE/de-DE.com_nuliga.sys.ini</language>
         </languages>
     </administration>
 

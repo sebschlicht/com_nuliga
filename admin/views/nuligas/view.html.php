@@ -27,9 +27,18 @@ class NuLigaViewNuLigas extends JViewLegacy
      */
     function display($tpl = null)
     {
+        // get application
+        $app = JFactory::getApplication();
+        $context = "nuliga.list.admin.nuliga";
+
         // get model data
         $this->items		= $this->get('Items');
         $this->pagination	= $this->get('Pagination');
+        $this->state			= $this->get('State');
+        $this->filter_order 	= $app->getUserStateFromRequest($context.'filter_order', 'filter_order', 'greeting', 'cmd');
+        $this->filter_order_Dir = $app->getUserStateFromRequest($context.'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd');
+        $this->filterForm    	= $this->get('FilterForm');
+        $this->activeFilters 	= $this->get('ActiveFilters');
 
         // check for errors
         if (count($errors = $this->get('Errors')))
