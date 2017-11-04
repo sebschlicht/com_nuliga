@@ -8,8 +8,8 @@
         <field
                 name="greeting"
                 type="text"
-                label="COM_NULIGA_NULIGA_GREETING_LABEL"
-                description="COM_NULIGA_NULIGA_GREETING_DESC"
+                label="COM_NULIGA_NULIGA_FIELD_GREETING_LABEL"
+                description="COM_NULIGA_NULIGA_FIELD_GREETING_DESC"
                 size="40"
                 class="inputbox"
                 default=""

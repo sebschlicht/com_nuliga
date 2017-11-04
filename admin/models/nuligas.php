@@ -10,8 +10,10 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * NuLigaList Model
+ * Backend model for the NuLiga table list.
  *
+ * @package     Joomla.Administrator
+ * @subpackage  com_nuliga
  * @since  0.0.7
  */
 class NuLigaModelNuLigas extends JModelList
@@ -19,15 +21,15 @@ class NuLigaModelNuLigas extends JModelList
     /**
      * Method to build an SQL query to load the list data.
      *
-     * @return      string  An SQL query
+     * @return      string  SQL query
      */
     protected function getListQuery()
     {
-        // Initialize variables.
+        // initialize variables
         $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
 
-        // Create the base select statement.
+        // select all NuLiga tables
         $query->select('*')
             ->from($db->quoteName('#__nuliga'));
 

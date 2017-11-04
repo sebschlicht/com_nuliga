@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * NuLiga Controller
+ * Administration controller for single NuLiga tables.
  *
  * @package     Joomla.Administrator
  * @subpackage  com_nuliga

@@ -10,8 +10,10 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * NuLiga Table class
+ * NuLiga table class.
  *
+ * @package     Joomla.Administrator
+ * @subpackage  com_nuliga
  * @since  0.0.6
  */
 class NuLigaTableNuLiga extends JTable
@@ -19,7 +21,7 @@ class NuLigaTableNuLiga extends JTable
     /**
      * Constructor
      *
-     * @param   JDatabaseDriver  &$db  A database connector object
+     * @param   JDatabaseDriver  &$db  database connector object
      */
     function __construct(&$db)
     {

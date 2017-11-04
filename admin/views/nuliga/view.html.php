@@ -10,33 +10,35 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * NuLiga View
+ * View to edit NuLiga single tables.
  *
+ * @package     Joomla.Administrator
+ * @subpackage  com_nuliga
  * @since  0.0.9
  */
 class NuLigaViewNuLiga extends JViewLegacy
 {
     /**
-     * View form
+     * form to edit NuLiga tables
      *
      * @var         form
      */
     protected $form = null;
 
     /**
-     * Display the NuLiga view
+     * Displays the NuLiga view.
      *
-     * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+     * @param   string  $tpl  template file name to parse; automatically searches through template paths
      *
      * @return  void
      */
     public function display($tpl = null)
     {
-        // Get the Data
+        // get data
         $this->form = $this->get('Form');
         $this->item = $this->get('Item');
 
-        // Check for errors.
+        // check for errors
         if (count($errors = $this->get('Errors')))
         {
             JError::raiseError(500, implode('<br />', $errors));
@@ -45,15 +47,15 @@ class NuLigaViewNuLiga extends JViewLegacy
         }
 
 
-        // Set the toolbar
+        // add toolbar
         $this->addToolBar();
 
-        // Display the template
+        // display template
         parent::display($tpl);
     }
 
     /**
-     * Add the page title and toolbar.
+     * Adds the toolbar with title and actions.
      *
      * @return  void
      *
@@ -63,20 +65,14 @@ class NuLigaViewNuLiga extends JViewLegacy
     {
         $input = JFactory::getApplication()->input;
 
-        // Hide Joomla Administrator Main menu
+        // hide main Joomla administration menu
         $input->set('hidemainmenu', true);
 
+        // set title depending on item action
         $isNew = ($this->item->id == 0);
+        $title = JText::_($isNew ? 'COM_NULIGA_MANAGER_NULIGA_NEW' : 'COM_NULIGA_MANAGER_NULIGA_EDIT');
 
-        if ($isNew)
-        {
-            $title = JText::_('COM_NULIGA_MANAGER_NULIGA_NEW');
-        }
-        else
-        {
-            $title = JText::_('COM_NULIGA_MANAGER_NULIGA_EDIT');
-        }
-
+        // add tool bar components
         JToolbarHelper::title($title, 'nuliga');
         JToolbarHelper::save('nuliga.save');
         JToolbarHelper::cancel(

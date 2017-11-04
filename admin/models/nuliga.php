@@ -10,8 +10,10 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * NuLiga Model
+ * Backend model for single NuLiga tables.
  *
+ * @package     Joomla.Administrator
+ * @subpackage  com_nuliga
  * @since  0.0.9
  */
 class NuLigaModelNuLiga extends JModelAdmin
@@ -19,11 +21,11 @@ class NuLigaModelNuLiga extends JModelAdmin
     /**
      * Method to get a table object, load it if necessary.
      *
-     * @param   string  $type    The table name. Optional.
-     * @param   string  $prefix  The class prefix. Optional.
-     * @param   array   $config  Configuration array for model. Optional.
+     * @param   string  $type    [table name]
+     * @param   string  $prefix  [class prefix]
+     * @param   array   $config  [configuration array]
      *
-     * @return  JTable  A JTable object
+     * @return  JTable  table object
      *
      * @since   1.6
      */
@@ -35,16 +37,16 @@ class NuLigaModelNuLiga extends JModelAdmin
     /**
      * Method to get the record form.
      *
-     * @param   array    $data      Data for the form.
-     * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
+     * @param   array    $data      form data
+     * @param   boolean  $loadData  true if the form is to load its own data (default case), false if not
      *
-     * @return  mixed    A JForm object on success, false on failure
+     * @return  mixed    JForm object on success, false on failure
      *
      * @since   1.6
      */
     public function getForm($data = array(), $loadData = true)
     {
-        // Get the form.
+        // load form
         $form = $this->loadForm(
             'com_nuliga.nuliga',
             'nuliga',
@@ -54,29 +56,25 @@ class NuLigaModelNuLiga extends JModelAdmin
             )
         );
 
-        if (empty($form))
-        {
-            return false;
-        }
-
-        return $form;
+        return (empty($form) ? false : $form);
     }
 
     /**
      * Method to get the data that should be injected in the form.
      *
-     * @return  mixed  The data for the form.
+     * @return  mixed  form data
      *
      * @since   1.6
      */
     protected function loadFormData()
     {
-        // Check the session for previously entered form data.
+        // check session for previously entered form data
         $data = JFactory::getApplication()->getUserState(
             'com_nuliga.edit.nuliga.data',
             array()
         );
 
+        // insert item as form data if empty
         if (empty($data))
         {
             $data = $this->getItem();

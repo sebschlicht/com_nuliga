@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * General Controller of NuLiga component
+ * Main controller of the NuLiga component.
  *
  * @package     Joomla.Administrator
  * @subpackage  com_nuliga
@@ -19,7 +19,7 @@ defined('_JEXEC') or die('Restricted access');
 class NuLigaController extends JControllerLegacy
 {
     /**
-     * The default view for the display method.
+     * default view for display method
      *
      * @var string
      * @since 12.2

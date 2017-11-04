@@ -10,26 +10,28 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * NuLiga View
+ * NuLiga table list view.
  *
+ * @package     Joomla.Administrator
+ * @subpackage  com_nuliga
  * @since  0.0.7
  */
 class NuLigaViewNuLigas extends JViewLegacy
 {
     /**
-     * Display the NuLiga view
+     * Displays the NuLiga table list view.
      *
-     * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+     * @param   string  $tpl  template file name to parse; automatically searches through template paths
      *
      * @return  void
      */
     function display($tpl = null)
     {
-        // Get data from the model
+        // get model data
         $this->items		= $this->get('Items');
         $this->pagination	= $this->get('Pagination');
 
-        // Check for errors.
+        // check for errors
         if (count($errors = $this->get('Errors')))
         {
             JError::raiseError(500, implode('<br />', $errors));
@@ -37,15 +39,15 @@ class NuLigaViewNuLigas extends JViewLegacy
             return false;
         }
 
-        // Set the toolbar
+        // add toolbar
         $this->addToolBar();
 
-        // Display the template
+        // display template
         parent::display($tpl);
     }
 
     /**
-     * Add the page title and toolbar.
+     * Adds the toolbar with title and actions.
      *
      * @return  void
      *

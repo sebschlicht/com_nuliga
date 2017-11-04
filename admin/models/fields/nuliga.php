@@ -12,14 +12,16 @@ defined('_JEXEC') or die('Restricted access');
 JFormHelper::loadFieldClass('list');
 
 /**
- * NuLiga Form Field class for the NuLiga component
+ * NuLiga table form field for the NuLiga component.
  *
+ * @package     Joomla.Administrator
+ * @subpackage  com_nuliga
  * @since  0.0.6
  */
 class JFormFieldNuLiga extends JFormFieldList
 {
     /**
-     * The field type.
+     * field type
      *
      * @var         string
      */
@@ -28,14 +30,19 @@ class JFormFieldNuLiga extends JFormFieldList
     /**
      * Method to get a list of options for a list input.
      *
-     * @return  array  An array of JHtml options.
+     * @return  array  JHtml options array
      */
     protected function getOptions()
     {
+        // initialize variables
         $db    = JFactory::getDBO();
         $query = $db->getQuery(true);
-        $query->select('id,greeting');
-        $query->from('#__nuliga');
+
+        // select all NuLiga tables
+        $query->select('id,greeting')
+            ->from('#__nuliga');
+
+        // execute query and build select box
         $db->setQuery((string) $query);
         $messages = $db->loadObjectList();
         $options  = array();
