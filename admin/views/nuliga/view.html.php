@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: sebschlicht
  * Date: 03.11.17
- * Time: 18:06
+ * Time: 23:53
  */
 
 // No direct access to this file
@@ -12,10 +12,17 @@ defined('_JEXEC') or die('Restricted access');
 /**
  * NuLiga View
  *
- * @since  0.0.7
+ * @since  0.0.9
  */
 class NuLigaViewNuLiga extends JViewLegacy
 {
+    /**
+     * View form
+     *
+     * @var         form
+     */
+    protected $form = null;
+
     /**
      * Display the NuLiga view
      *
@@ -23,11 +30,11 @@ class NuLigaViewNuLiga extends JViewLegacy
      *
      * @return  void
      */
-    function display($tpl = null)
+    public function display($tpl = null)
     {
-        // Get data from the model
-        $this->items		= $this->get('Items');
-        $this->pagination	= $this->get('Pagination');
+        // Get the Data
+        $this->form = $this->get('Form');
+        $this->item = $this->get('Item');
 
         // Check for errors.
         if (count($errors = $this->get('Errors')))
@@ -37,7 +44,44 @@ class NuLigaViewNuLiga extends JViewLegacy
             return false;
         }
 
+
+        // Set the toolbar
+        $this->addToolBar();
+
         // Display the template
         parent::display($tpl);
+    }
+
+    /**
+     * Add the page title and toolbar.
+     *
+     * @return  void
+     *
+     * @since   1.6
+     */
+    protected function addToolBar()
+    {
+        $input = JFactory::getApplication()->input;
+
+        // Hide Joomla Administrator Main menu
+        $input->set('hidemainmenu', true);
+
+        $isNew = ($this->item->id == 0);
+
+        if ($isNew)
+        {
+            $title = JText::_('COM_NULIGA_MANAGER_NULIGA_NEW');
+        }
+        else
+        {
+            $title = JText::_('COM_NULIGA_MANAGER_NULIGA_EDIT');
+        }
+
+        JToolbarHelper::title($title, 'nuliga');
+        JToolbarHelper::save('nuliga.save');
+        JToolbarHelper::cancel(
+            'nuliga.cancel',
+            $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE'
+        );
     }
 }

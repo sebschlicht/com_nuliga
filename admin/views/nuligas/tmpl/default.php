@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted Access');
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
             <th width="90%">
-                <?php echo JText::_('COM_NULIGA_NULIGA_NAME') ;?>
+                <?php echo JText::_('COM_NULIGA_NULIGAS_NAME') ;?>
             </th>
             <th width="5%">
                 <?php echo JText::_('COM_NULIGA_PUBLISHED'); ?>
@@ -37,7 +37,9 @@ defined('_JEXEC') or die('Restricted Access');
         </tfoot>
         <tbody>
         <?php if (!empty($this->items)) : ?>
-            <?php foreach ($this->items as $i => $row) : ?>
+            <?php foreach ($this->items as $i => $row) :
+                $link = JRoute::_('index.php?option=com_nuliga&task=nuliga.edit&id=' . $row->id);
+            ?>
 
                 <tr>
                     <td>
@@ -47,10 +49,12 @@ defined('_JEXEC') or die('Restricted Access');
                         <?php echo JHtml::_('grid.id', $i, $row->id); ?>
                     </td>
                     <td>
-                        <?php echo $row->greeting; ?>
+                        <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_NULIGA_EDIT_NULIGA'); ?>">
+                            <?php echo $row->greeting; ?>
+                        </a>
                     </td>
                     <td align="center">
-                        <?php echo JHtml::_('jgrid.published', $row->published, $i, 'nuliga.', true, 'cb'); ?>
+                        <?php echo JHtml::_('jgrid.published', $row->published, $i, 'nuligas.', true, 'cb'); ?>
                     </td>
                     <td align="center">
                         <?php echo $row->id; ?>
@@ -60,4 +64,7 @@ defined('_JEXEC') or die('Restricted Access');
         <?php endif; ?>
         </tbody>
     </table>
+    <input type="hidden" name="task" value=""/>
+    <input type="hidden" name="boxchecked" value="0"/>
+    <?php echo JHtml::_('form.token'); ?>
 </form>
