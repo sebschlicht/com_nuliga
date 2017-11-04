@@ -17,7 +17,6 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 <form action="index.php?option=com_nuliga&view=nuligas" method="post" id="adminForm" name="adminForm">
     <div class="row-fluid">
         <div class="span6">
-            <?php echo JText::_('COM_NULIGA_NULIGAS_FILTER'); ?>
             <?php
             echo JLayoutHelper::render(
                 'joomla.searchtools.default',
