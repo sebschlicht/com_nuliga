@@ -52,6 +52,9 @@ class NuLigaViewNuLiga extends JViewLegacy
 
         // display template
         parent::display($tpl);
+
+        // prepare document
+        $this->setDocument();
     }
 
     /**
@@ -79,5 +82,17 @@ class NuLigaViewNuLiga extends JViewLegacy
             'nuliga.cancel',
             $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE'
         );
+    }
+
+    /**
+     * Method to set up the document properties.
+     *
+     * @return void
+     */
+    protected function setDocument()
+    {
+        $isNew = ($this->item->id < 1);
+        $document = JFactory::getDocument();
+        $document->setTitle(JText::_($isNew ? 'COM_NULIGA_NULIGA_CREATING' : 'COM_NULIGA_NULIGA_EDITING'));
     }
 }
