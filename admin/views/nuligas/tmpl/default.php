@@ -33,7 +33,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
             <th width="40%">
-                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_NAME', 'title', $listDirn, $listOrder); ?>
+                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_TITLE', 'title', $listDirn, $listOrder); ?>
             </th>
             <th width="50%">
                 <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_URL', 'url', $listDirn, $listOrder); ?>

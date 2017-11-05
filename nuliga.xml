@@ -11,8 +11,12 @@
     <copyright>Copyright 2017 JabLab GbR. All rights reserved.</copyright>
     <!-- <license>License Info</license> -->
 
+    <updateservers>
+        <server type="extension" name="NuLiga Extension Updates">http://dev.jablab.de/updates/com_nuliga/extension.xml</server>
+    </updateservers>
+
     <!--  The version string is recorded in the components table -->
-    <version>0.0.10</version>
+    <version>0.0.13</version>
 
     <!-- The description is optional and defaults to the name -->
     <description>COM_NULIGA_DESCRIPTION</description>
