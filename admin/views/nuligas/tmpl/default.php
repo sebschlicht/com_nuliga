@@ -32,8 +32,11 @@ $listDirn      = $this->escape($this->filter_order_Dir);
             <th width="2%">
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
-            <th width="90%">
-                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_NAME', 'greeting', $listDirn, $listOrder); ?>
+            <th width="40%">
+                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_NAME', 'title', $listDirn, $listOrder); ?>
+            </th>
+            <th width="50%">
+                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_URL', 'url', $listDirn, $listOrder); ?>
             </th>
             <th width="5%">
                 <?php echo JHtml::_('grid.sort', 'COM_NULIGA_PUBLISHED', 'published', $listDirn, $listOrder); ?>
@@ -65,8 +68,11 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                     </td>
                     <td>
                         <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_NULIGA_EDIT_NULIGA'); ?>">
-                            <?php echo $row->greeting; ?>
+                            <?php echo $row->title; ?>
                         </a>
+                    </td>
+                    <td>
+                        <?php echo $row->url; ?>
                     </td>
                     <td align="center">
                         <?php echo JHtml::_('jgrid.published', $row->published, $i, 'nuligas.', true, 'cb'); ?>

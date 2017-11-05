@@ -39,7 +39,7 @@ class JFormFieldNuLiga extends JFormFieldList
         $query = $db->getQuery(true);
 
         // select all NuLiga tables
-        $query->select('id,greeting')
+        $query->select('id,title')
             ->from('#__nuliga');
 
         // execute query and build select box
@@ -51,7 +51,7 @@ class JFormFieldNuLiga extends JFormFieldList
         {
             foreach ($messages as $message)
             {
-                $options[] = JHtml::_('select.option', $message->id, $message->greeting);
+                $options[] = JHtml::_('select.option', $message->id, $message->title);
             }
         }
 

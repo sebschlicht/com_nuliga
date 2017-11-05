@@ -66,7 +66,7 @@ class NuLigaModelNuLiga extends JModelItem
             $table->load($id);
 
             // store greeting message
-            $this->messages[$id] = $table->greeting;
+            $this->messages[$id] = $table->title;
         }
 
         return $this->messages[$id];

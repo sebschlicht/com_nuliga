@@ -32,7 +32,7 @@ class NuLigaModelNuLigas extends JModelList
         {
             $config['filter_fields'] = array(
                 'id',
-                'greeting',
+                'title',
                 'published'
             );
         }
@@ -60,7 +60,7 @@ class NuLigaModelNuLigas extends JModelList
         if (!empty($search))
         {
             $like = $db->quote('%' . $search . '%');
-            $query->where('greeting LIKE ' . $like);
+            $query->where('title LIKE ' . $like);
         }
 
         // filter: published state
@@ -75,7 +75,7 @@ class NuLigaModelNuLigas extends JModelList
         }
 
         // order
-        $orderCol	= $this->state->get('list.ordering', 'greeting');
+        $orderCol	= $this->state->get('list.ordering', 'title');
         $orderDirn 	= $this->state->get('list.direction', 'asc');
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
 
