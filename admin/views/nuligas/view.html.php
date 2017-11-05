@@ -64,7 +64,7 @@ class NuLigaViewNuLigas extends JViewLegacy
      */
     protected function addToolBar()
     {
-        JToolbarHelper::title(JText::_('COM_NULIGA_MANAGER_NULIGAS'));
+        JToolbarHelper::title(JText::_('COM_NULIGA_MANAGER_NULIGAS'), 'nuliga');
         JToolbarHelper::addNew('nuliga.add');
         JToolbarHelper::editList('nuliga.edit');
         JToolbarHelper::deleteList('', 'nuligas.delete');
