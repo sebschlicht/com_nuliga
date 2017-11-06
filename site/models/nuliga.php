@@ -59,16 +59,30 @@ class NuLigaModelNuLiga extends JModelItem
             $jinput = JFactory::getApplication()->input;
             $id     = $jinput->get('id', 1, 'INT');
 
-            // get a TableNuLiga instance
-            $table = $this->getTable();
-
             // load NuLiga table
-            $table->load($id);
+            $table = $this->loadNuLigaTable($id);
 
             // store greeting message
             $this->messages[$id] = $table->title;
         }
 
         return $this->messages[$id];
+    }
+
+    /**
+     * Loads a NuLiga table from the database.
+     *
+     * @param $id table identifier
+     * @return JTable NuLiga table loaded
+     */
+    public function loadNuLigaTable($id)
+    {
+        // get a TableNuLiga instance
+        $table = $this->getTable();
+
+        // load NuLiga table
+        $table->load($id);
+
+        return $table;
     }
 }
