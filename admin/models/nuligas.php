@@ -33,6 +33,8 @@ class NuLigaModelNuLigas extends JModelList
             $config['filter_fields'] = array(
                 'id',
                 'title',
+                'url',
+                'type',
                 'published'
             );
         }
@@ -80,5 +82,29 @@ class NuLigaModelNuLigas extends JModelList
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
 
         return $query;
+    }
+
+    /**
+     * Method to get a list of items.
+     *
+     * @return  mixed  An array of objects on success, false on failure.
+     */
+    public function getItems()
+    {
+        // load items from database
+        $items = parent::getItems();
+
+        // load types
+        $types = [
+            1 => JText::_('COM_NULIGA_NULIGA_FIELD_TYPE_VALUE_TABLE'),
+            2 => JText::_('COM_NULIGA_NULIGA_FIELD_TYPE_VALUE_MATCHES')
+        ];
+
+        // replace type id with text value
+        foreach ($items as $item) {
+            $id = (array_key_exists($item->type, $types) ? $item->type : 1);
+            $item->sType = $types[$id];
+        }
+        return $items;
     }
 }

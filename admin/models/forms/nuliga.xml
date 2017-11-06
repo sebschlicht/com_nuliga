@@ -16,6 +16,15 @@
                 default=""
         />
         <field
+                name="type"
+                type="list"
+                label="COM_NULIGA_NULIGA_FIELD_TYPE_LABEL"
+                description="COM_NULIGA_NULIGA_FIELD_TYPE_DESC"
+                default="1">
+            <option value="1">COM_NULIGA_NULIGA_FIELD_TYPE_VALUE_TABLE</option>
+            <option value="2">COM_NULIGA_NULIGA_FIELD_TYPE_VALUE_MATCHES</option>
+        </field>
+        <field
                 name="url"
                 type="text"
                 label="COM_NULIGA_NULIGA_FIELD_URL_LABEL"

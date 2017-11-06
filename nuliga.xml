@@ -16,7 +16,7 @@
     </updateservers>
 
     <!--  The version string is recorded in the components table -->
-    <version>0.0.13</version>
+    <version>0.0.14</version>
 
     <!-- The description is optional and defaults to the name -->
     <description>COM_NULIGA_DESCRIPTION</description>
@@ -58,6 +58,8 @@
 
     <media destination="com_nuliga" folder="media">
         <filename>index.html</filename>
+
+        <folder>css</folder>
         <folder>images</folder>
     </media>
 
