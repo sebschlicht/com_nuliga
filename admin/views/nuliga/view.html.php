@@ -46,7 +46,6 @@ class NuLigaViewNuLiga extends JViewLegacy
             return false;
         }
 
-
         // add toolbar
         $this->addToolBar();
 

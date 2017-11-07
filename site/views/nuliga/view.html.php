@@ -28,15 +28,19 @@ class NuLigaViewNuLiga extends JViewLegacy
     function display($tpl = null)
     {
         // assign view data
-        $this->msg = $this->get('Msg');
+        $nuLigaTable = $this->get('NuLigaTable');
+        $this->team = $nuLigaTable->title;
+        $this->teams = $this->get('Teams');
 
         // check for errors
         if (count($errors = $this->get('Errors')))
         {
             JLog::add(implode('<br />', $errors), JLog::WARNING, 'jerror');
-
             return false;
         }
+
+        // add style sheet
+        JHtml::stylesheet('com_nuliga/nuliga.css', false, true, false);
 
         // display template
         parent::display($tpl);

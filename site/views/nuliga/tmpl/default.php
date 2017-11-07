@@ -9,4 +9,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 ?>
-<h1><?php echo $this->msg; ?></h1>
+<h1 class="nuliga"><?php echo $this->team; ?></h1>
+<?php foreach($this->teams as $team): ?>
+    <p><?php echo $team->name; ?></p>
+<?php endforeach; ?>

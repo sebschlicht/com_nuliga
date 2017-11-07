@@ -1,2 +1,2 @@
 ALTER TABLE `#__nuliga`
-    ADD `type` TINYINT NOT NULL DEFAULT '1';
+  ADD `type` TINYINT NOT NULL DEFAULT '1';
