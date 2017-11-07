@@ -1,3 +1,27 @@
-.nuliga {
-    background: transparent;
+.nuliga table {
+    width: 100%;
+    background: white;
+}
+
+.nuliga table tr {
+    border-bottom: 1px solid #DDD;
+}
+.nuliga table tr:nth-child(2n+1) {
+    background-color: #BEC8D6;
+}
+.nuliga table tr:first-child {
+    background-color: #8B9CB5;
+}
+.nuliga table tr.highlight {
+    color: white;
+    background-color: #D4312E;
+    font-weight: 700;
+}
+
+.nuliga table td,
+.nuliga table th {
+    padding: 10px 20px;
+    border: 1px solid #DDD;
+    border-top: none;
+    border-bottom: none;
 }

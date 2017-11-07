@@ -117,7 +117,7 @@ class NuLigaModelNuLiga extends JModelItem
         {
             // use match model instance to load matches
             $model = JModelLegacy::getInstance('Leagueteams', 'NuLigaModel', array('ignore_request' => true));
-            // TODO $model->setState('filter.table_id', $this->_table->id);
+            $model->setState('filter.table_id', $this->_table->id);
             $this->_teams = $model->getItems();
 
             if ($this->_teams === false)

@@ -31,6 +31,7 @@ class NuLigaViewNuLiga extends JViewLegacy
         $nuLigaTable = $this->get('NuLigaTable');
         $this->team = $nuLigaTable->title;
         $this->teams = $this->get('Teams');
+        $this->highlight = array('TS Bendorf', 'TS Bendorf II', 'TS Bendorf III');
 
         // check for errors
         if (count($errors = $this->get('Errors')))
