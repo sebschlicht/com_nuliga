@@ -21,9 +21,7 @@ class NuLigaModelLeagueteams extends JModelList
         if (empty($config['filter_fields']))
         {
             $config['filter_fields'] = array(
-                'id',
-                'url',
-                'type',
+                'name',
                 'published'
             );
         }
@@ -70,7 +68,7 @@ class NuLigaModelLeagueteams extends JModelList
         }
 
         // ordering
-        $orderCol	= $this->state->get('list.ordering', 't.id');
+        $orderCol	= $this->state->get('list.ordering', 't.rank');
         $orderDirn 	= $this->state->get('list.direction', 'asc');
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
 

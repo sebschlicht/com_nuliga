@@ -22,6 +22,11 @@ abstract class NuLigaHandlerBase
     const DEFAULT_UPDATE_INTERVAL = 'PT30M';
 
     /**
+     * name of the table for NuLiga tables
+     */
+    const DB_TABLE_NULIGA_NAME = '#__nuliga';
+
+    /**
      * @var array registered NuLiga table handlers
      */
     protected static $handlers = array();
@@ -66,8 +71,27 @@ abstract class NuLigaHandlerBase
             $model = $this->parser->parseHtml($html);
             if ($model)
             {
-                // TODO sync DB via updater
-                return true;
+                // sync DB via updater
+                if ($this->updater->update($table->id, $model))
+                {
+                    // update last_update timestamp
+                    $db = JFactory::getDbo();
+                    $query = $db->getQuery(true);
+
+                    $now = new DateTime();
+                    $query->update(self::DB_TABLE_NULIGA_NAME)
+                        ->set($db->quoteName('last_update') . ' = ' . $db->quote($now->format('Y-m-d H:i:s')))
+                        ->where($db->quoteName('id') . ' = ' . $db->quote($table->id));
+
+                    $db->setQuery($query);
+                    // TODO potential error: db update failed
+                    return $db->execute();
+                }
+                else
+                {
+                    // TODO error: db update failed
+                    return false;
+                }
             }
             else
             {

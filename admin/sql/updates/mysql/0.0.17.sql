@@ -1,18 +1,3 @@
-DROP TABLE IF EXISTS `#__nuliga`;
-
-CREATE TABLE `#__nuliga` (
-  `id`       INT(11)     NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(25) NOT NULL,
-  `type` TINYINT NOT NULL DEFAULT '1',
-  `url` VARCHAR(255) NOT NULL,
-  `published` tinyint(4) NOT NULL DEFAULT '1',
-  `last_update` DATETIME,
-  PRIMARY KEY (`id`)
-)
-  ENGINE =MyISAM
-  AUTO_INCREMENT =0
-  DEFAULT CHARSET =utf8;
-
 DROP TABLE IF EXISTS `#__nuliga_leagueteams`;
 
 CREATE TABLE `#__nuliga_leagueteams` (
@@ -28,9 +13,12 @@ CREATE TABLE `#__nuliga_leagueteams` (
   `points` VARCHAR(32) NOT NULL,
   PRIMARY KEY (`name`),
   FOREIGN KEY (`tabid`)
-    REFERENCES `#__nuliga`(`id`)
+  REFERENCES `#__nuliga`(`id`)
     ON DELETE CASCADE
 )
   ENGINE =MyISAM
   AUTO_INCREMENT =0
   DEFAULT CHARSET =utf8;
+
+INSERT INTO `#__nuliga_leagueteams` (`tabid`, `rank`, `name`, `numMatches`, `numWins`, `numDraws`, `numLosses`, `goals`, `goalDiff`, `points`) VALUES
+  (2, 1, 'TestTeam', 1, 1, 0, 0, '33:32', '+1', '2:0');

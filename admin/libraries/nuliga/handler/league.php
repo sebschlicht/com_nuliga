@@ -20,7 +20,6 @@ class NuLigaHandlerLeague extends NuLigaHandlerBase
     {
         parent::__construct();
         $this->parser = new NuLigaParserLeague();
-        // TODO
-        $this->updater = null;
+        $this->updater = new NuLigaUpdateLeague();
     }
 }

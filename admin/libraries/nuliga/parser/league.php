@@ -66,20 +66,21 @@ class NuLigaParserLeague
     protected static function fromTableRow($tr)
     {
         // build column mapping
-        $model = array(
+        $tableColumns = array(
             'rank' => 1,
             'name' => 2,
-            'matches' => 3,
-            'wins' => 4,
-            'evens' => 5,
-            'losses' => 6,
+            'numMatches' => 3,
+            'numWins' => 4,
+            'numDraws' => 5,
+            'numLosses' => 6,
             'goals' => 7,
-            'goaldiff' => 8,
+            'goalDiff' => 8,
             'points' => 9
         );
 
         // load columns of table row
-        foreach ($model as $key => $value)
+        $model = array();
+        foreach ($tableColumns as $key => $value)
         {
             $model[$key] = self::getTableRowText($tr, $value);
         }
@@ -96,6 +97,6 @@ class NuLigaParserLeague
      */
     protected static function getTableRowText($tr, $column)
     {
-        return $tr->children($column)->plaintext;
+        return trim($tr->children($column)->plaintext);
     }
 }
