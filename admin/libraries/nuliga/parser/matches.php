@@ -12,17 +12,17 @@ defined('_JEXEC') or die('Restricted access');
 require_once('simple_html_dom.php');
 
 /**
- * HTML parser for team league NuLiga pages.
+ * HTML parser for NuLiga match list pages.
  *
- * @since 0.0.16
+ * @since 0.0.19
  */
-class NuLigaParserLeague
+class NuLigaParserMatches
 {
     /**
-     * Extracts the league teams from a team league NuLiga page.
+     * Extracts the matches from a NuLiga match list page.
      *
-     * @param $html string content of a NuLiga page, displaying a team's league
-     * @return array|null list of teams in the league displayed on the page or null on error
+     * @param $html string content of a NuLiga page, displaying a team's match list
+     * @return array|null list of matches in the list displayed on the page or null on error
      */
     public function parseHtml($html)
     {
@@ -30,12 +30,12 @@ class NuLigaParserLeague
         $dom = str_get_html($html);
 
         // load teams from DOM tree
-        $leagueTable = $dom->find('table.result-set', 0);
-        if ($leagueTable)
+        $matchesTable = $dom->find('table.result-set', 0);
+        if ($matchesTable)
         {
-            $teams = array();
+            $matches = array();
             $isHeader = true;
-            foreach ($leagueTable->children() as $tr)
+            foreach ($matchesTable->children() as $tr)
             {
                 // skip header row
                 if ($isHeader)
@@ -44,11 +44,11 @@ class NuLigaParserLeague
                     continue;
                 }
 
-                // process league table row
-                $team = self::fromTableRow($tr);
-                array_push($teams, $team);
+                // process match table row
+                $match = self::fromTableRow($tr);
+                array_push($matches, $match);
             }
-            return $teams;
+            return $matches;
         }
         else
         {
@@ -58,24 +58,25 @@ class NuLigaParserLeague
     }
 
     /**
-     * Loads a league team object from a table row.
+     * Loads a match object from a table row.
      *
      * @param $tr object table row
-     * @return array league team object as array
+     * @return array match object as array
      */
     protected static function fromTableRow($tr)
     {
         // build column mapping
         $tableColumns = array(
-            'rank' => 1,
-            'name' => 2,
-            'numMatches' => 3,
-            'numWins' => 4,
-            'numDraws' => 5,
-            'numLosses' => 6,
+            'weekday' => 0,
+            'date' => 1,
+            'time' => 2,
+            'hall' => 3,
+            'nr' => 4,
+            'home' => 5,
+            'guest' => 6,
             'goals' => 7,
-            'goalDiff' => 8,
-            'points' => 9
+            'reportUrl' => 8,
+            'isPlayed' => 9
         );
 
         // load columns of table row

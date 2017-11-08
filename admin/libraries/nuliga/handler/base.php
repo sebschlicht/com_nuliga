@@ -179,6 +179,7 @@ abstract class NuLigaHandlerBase
         if (empty(self::$handlers))
         {
             self::registerHandler(1, new NuLigaHandlerLeague());
+            self::registerHandler(2, new NuLigaHandlerMatches());
         }
     }
 }

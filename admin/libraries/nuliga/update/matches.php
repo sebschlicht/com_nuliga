@@ -10,52 +10,52 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * Helper to update league teams in the database.
+ * Helper to update matches in the database.
  *
- * @since 0.0.17
+ * @since 0.0.19
  */
-class NuLigaUpdateLeague
+class NuLigaUpdateMatches
 {
     /**
-     * NuLiga league teams table name
+     * NuLiga matches table name
      */
-    const DB_TABLE_NAME = '#__nuliga_leagueteams';
+    const DB_TABLE_NAME = '#__nuliga_matches';
 
     /**
-     * NuLiga league teams table columns
+     * NuLiga matches table columns
      */
-    const DB_TABLE_COLUMNS = array('tabid', 'rank', 'name', 'numMatches', 'numWins', 'numDraws', 'numLosses', 'goals',
-        'goalDiff', 'points');
+    const DB_TABLE_COLUMNS = array('tabid', 'weekday', 'date', 'time', 'hall', 'nr', 'home', 'guest', 'goals',
+        'reportUrl', 'isPlayed');
 
     /**
-     * NuLiga league teams table column: NuLiga table id
+     * NuLiga matches table column: NuLiga table id
      */
     const DB_TABLE_COLUMN_TABLEID = 'tabid';
 
     /**
-     * Stores the current NuLiga league teams in the database.
+     * Stores the current NuLiga matches in the database.
      *
      * @param $tableId int NuLiga table id
-     * @param $leagueteams array current league teams
+     * @param $matches array current matches
      * @return bool true if the database update was successful, otherwise false
      */
-    public function update($tableId, $leagueteams)
+    public function update($tableId, $matches)
     {
         $db = JFactory::getDbo();
 
         // add NuLiga table id
-        $numLeagueTeams = count($leagueteams);
-        for ($i = 0; $i < $numLeagueTeams; $i++)
+        $numMatches = count($matches);
+        for ($i = 0; $i < $numMatches; $i++)
         {
-            $leagueteams[$i][self::DB_TABLE_COLUMN_TABLEID] = $tableId;
+            $matches[$i][self::DB_TABLE_COLUMN_TABLEID] = $tableId;
         }
 
-        // insert/update league teams
-        foreach ($leagueteams as $leagueteam)
+        // insert/update matches
+        foreach ($matches as $match)
         {
-            if (!self::isLeagueteamExisting($tableId, $leagueteam['name']))
+            if (!self::isMatchExisting($tableId, $match['nr']))
             {
-                $values = self::getValues($db, $leagueteam);
+                $values = self::getValues($db, $match);
 
                 $query = $db->getQuery(true);
                 $query->insert($db->quoteName(self::DB_TABLE_NAME))
@@ -71,12 +71,12 @@ class NuLigaUpdateLeague
             }
             else
             {
-                $fields = self::getFields($db, $leagueteam);
+                $fields = self::getFields($db, $match);
 
                 $query = $db->getQuery(true);
                 $query->update(self::DB_TABLE_NAME)
                     ->set($fields)
-                    ->where($db->quoteName('name') . ' = ' . $db->quote($leagueteam['name']));
+                    ->where($db->quoteName('nr') . ' = ' . $db->quote($match['nr']));
 
                 $db->setQuery($query);
 
@@ -91,13 +91,13 @@ class NuLigaUpdateLeague
     }
 
     /**
-     * Checks if a league team is existing in the respective table.
+     * Checks if a match is existing in the respective table.
      *
      * @param $tableId int NuLiga table id
-     * @param $name string team name
-     * @return bool true if the league team is existing, otherwise false
+     * @param $nr string match number
+     * @return bool true if the match is existing, otherwise false
      */
-    protected static function isLeagueteamExisting($tableId, $name)
+    protected static function isMatchExisting($tableId, $nr)
     {
         $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
@@ -105,7 +105,7 @@ class NuLigaUpdateLeague
         $query->select('COUNT(*)')
             ->from(self::DB_TABLE_NAME)
             ->where(array(
-                'name = ' . $db->quote($name),
+                'nr = ' . $db->quote($nr),
                 'tabid = ' . $db->quote((int) $tableId)
             ));
 

@@ -6,7 +6,7 @@
  * Time: 15:02
  */
 
-class NuLigaModelLeagueteams extends JModelList
+class NuLigaModelMatches extends JModelList
 {
     /**
      * Constructor.
@@ -21,7 +21,9 @@ class NuLigaModelLeagueteams extends JModelList
         if (empty($config['filter_fields']))
         {
             $config['filter_fields'] = array(
-                'name',
+                'date',
+                'home',
+                'guest',
                 'published'
             );
         }
@@ -30,7 +32,7 @@ class NuLigaModelLeagueteams extends JModelList
     }
 
     /**
-     * Get the master query for retrieving a list of league teams subject to the model state.
+     * Get the master query for retrieving a list of team matches subject to the model state.
      *
      * @return  JDatabaseQuery
      *
@@ -45,30 +47,30 @@ class NuLigaModelLeagueteams extends JModelList
         $db = $this->getDbo();
         $query = $db->getQuery(true);
 
-        // select all fields of league teams
+        // select all fields of matches
         $query->select('*')
-            ->from('#__nuliga_leagueteams AS t');
+            ->from('#__nuliga_matches AS m');
 
         // filter: NuLiga table id
         $tableId = $this->getState('filter.table_id');
         if (is_numeric($tableId))
         {
-            $query->where('t.tabid = ' . (int) $tableId);
+            $query->where('m.tabid = ' . (int) $tableId);
         }
 
         // filter: published state
         $published = $this->getState('filter.published');
         if (is_numeric($published))
         {
-            $query->where('t.published = ' . (int) $published);
+            $query->where('m.published = ' . (int) $published);
         }
         elseif ($published === '')
         {
-            $query->where('(t.published IN (0, 1))');
+            $query->where('(m.published IN (0, 1))');
         }
 
         // ordering
-        $orderCol	= $this->state->get('list.ordering', 't.rank');
+        $orderCol	= $this->state->get('list.ordering', 'm.date');
         $orderDirn 	= $this->state->get('list.direction', 'asc');
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
 

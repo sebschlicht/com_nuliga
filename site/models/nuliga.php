@@ -33,6 +33,11 @@ class NuLigaModelNuLiga extends JModelItem
     protected $_teams;
 
     /**
+     * @var array NuLiga team matches
+     */
+    protected $_matches;
+
+    /**
      * Method to get a table object, load it if necessary.
      *
      * @param   string  $type    [table name]
@@ -49,11 +54,9 @@ class NuLigaModelNuLiga extends JModelItem
     }
 
     /**
-     * Get the message of a greeting.
+     * Retrieves the NuLiga table of the current request.
      *
-     * @param   integer  $id  greeting id
-     *
-     * @return  string        greeting message
+     * @return JTable NuLiga table object
      */
     public function getNuLigaTable($id = 1)
     {
@@ -63,6 +66,16 @@ class NuLigaModelNuLiga extends JModelItem
 
         // load NuLiga table
         return $this->loadNuLigaTable($id);
+    }
+
+    /**
+     * Gets the type of the current NuLiga table, if loaded.
+     *
+     * @return int|null table type or null if not loaded
+     */
+    public function getNuLigaTableType()
+    {
+        return ($this->_table->type !== null) ? $this->_table->type : null;
     }
 
     /**
@@ -115,7 +128,7 @@ class NuLigaModelNuLiga extends JModelItem
     {
         if ($this->_teams === null && $this->_table !== null)
         {
-            // use match model instance to load matches
+            // use league team model instance to load teams
             $model = JModelLegacy::getInstance('Leagueteams', 'NuLigaModel', array('ignore_request' => true));
             $model->setState('filter.table_id', $this->_table->id);
             $this->_teams = $model->getItems();
@@ -126,5 +139,22 @@ class NuLigaModelNuLiga extends JModelItem
             }
         }
         return $this->_teams;
+    }
+
+    public function getMatches()
+    {
+        if ($this->_matches === null && $this->_table !== null)
+        {
+            // use match model instance to load matches
+            $model = JModelLegacy::getInstance('Matches', 'NuLigaModel', array('ignore_request' => true));
+            $model->setState('filter.table_id', $this->_table->id);
+            $this->_matches = $model->getItems();
+
+            if ($this->_matches === false)
+            {
+                $this->setError($model->getError());
+            }
+        }
+        return $this->_matches;
     }
 }

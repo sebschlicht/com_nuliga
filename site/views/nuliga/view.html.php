@@ -19,6 +19,31 @@ defined('_JEXEC') or die('Restricted access');
 class NuLigaViewNuLiga extends JViewLegacy
 {
     /**
+     * @var string team title
+     */
+    protected $team;
+
+    /**
+     * @var int NuLiga table type
+     */
+    protected $type;
+
+    /**
+     * @var array team names to be highlighted
+     */
+    protected $highlight;
+
+    /**
+     * @var array league teams (NuLiga league tables only)
+     */
+    protected $teams;
+
+    /**
+     * @var array team matches (NuLiga match list tables only)
+     */
+    protected $matches;
+
+    /**
      * Displays the NuLiga table view.
      *
      * @param   string  $tpl  template file name to parse; automatically searches through template paths
@@ -29,9 +54,20 @@ class NuLigaViewNuLiga extends JViewLegacy
     {
         // assign view data
         $nuLigaTable = $this->get('NuLigaTable');
+        $this->type = $this->get('NuLigaTableType');
         $this->team = $nuLigaTable->title;
-        $this->teams = $this->get('Teams');
         $this->highlight = array('TS Bendorf', 'TS Bendorf II', 'TS Bendorf III');
+
+        if ($this->type == 1)
+        {
+            $this->teams = $this->get('Teams');
+        }
+        else
+        {
+            echo 'loading matches:';
+            $this->matches = $this->get('Matches');
+            echo count($this->matches) . ';';
+        }
 
         // check for errors
         if (count($errors = $this->get('Errors')))
