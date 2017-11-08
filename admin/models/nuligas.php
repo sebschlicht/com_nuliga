@@ -33,8 +33,9 @@ class NuLigaModelNuLigas extends JModelList
             $config['filter_fields'] = array(
                 'id',
                 'title',
-                'url',
                 'type',
+                'url',
+                'last_update',
                 'published'
             );
         }

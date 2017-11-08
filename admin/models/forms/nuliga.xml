@@ -35,5 +35,13 @@
                 required="true"
                 default=""
         />
+        <field
+                name="last_update"
+                type="calendar"
+                label="COM_NULIGA_NULIGA_FIELD_LASTUPDATE_LABEL"
+                description="COM_NULIGA_NULIGA_FIELD_LASTUPDATE_DESC"
+                showtime="true"
+                default=""
+        />
     </fieldset>
 </form>

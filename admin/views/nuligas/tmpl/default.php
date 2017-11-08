@@ -32,19 +32,22 @@ $listDirn      = $this->escape($this->filter_order_Dir);
             <th width="2%">
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
-            <th width="30%">
+            <th width="25%">
                 <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_TITLE', 'title', $listDirn, $listOrder); ?>
             </th>
-            <th width="20%">
+            <th width="17%">
                 <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_TYPE', 'type', $listDirn, $listOrder); ?>
             </th>
-            <th width="40%">
+            <th width="35%">
                 <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_URL', 'url', $listDirn, $listOrder); ?>
+            </th>
+            <th width="10%">
+                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_LASTUPDATE', 'last_update', $listDirn, $listOrder); ?>
             </th>
             <th width="5%">
                 <?php echo JHtml::_('grid.sort', 'COM_NULIGA_PUBLISHED', 'published', $listDirn, $listOrder); ?>
             </th>
-            <th width="2%">
+            <th width="5%">
                 <?php echo JHtml::_('grid.sort', 'COM_NULIGA_ID', 'id', $listDirn, $listOrder); ?>
             </th>
         </tr>
@@ -79,6 +82,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                     </td>
                     <td>
                         <?php echo $row->url; ?>
+                    </td>
+                    <td>
+                        <?php echo $row->last_update; ?>
                     </td>
                     <td align="center">
                         <?php echo JHtml::_('jgrid.published', $row->published, $i, 'nuligas.', true, 'cb'); ?>
