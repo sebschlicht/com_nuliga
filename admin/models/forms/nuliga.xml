@@ -40,6 +40,7 @@
                 type="calendar"
                 label="COM_NULIGA_NULIGA_FIELD_LASTUPDATE_LABEL"
                 description="COM_NULIGA_NULIGA_FIELD_LASTUPDATE_DESC"
+                translateformat="true"
                 showtime="true"
                 default=""
         />

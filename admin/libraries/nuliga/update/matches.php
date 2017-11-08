@@ -58,7 +58,7 @@ class NuLigaUpdateMatches
         }
 
         // re-insert matches
-        if (self::removeMatches($tableId))
+        if (self::removeMatches($db, $tableId))
         {
             foreach ($matches as $match)
             {
@@ -72,14 +72,18 @@ class NuLigaUpdateMatches
                 $db->setQuery($query);
                 if (!$db->execute())
                 {
-                    // TODO error: insertion failed
+                    // error: insertion failed
+                    JLog::add("Failed to insert matches for NuLiga table #$tableId!", JLog::WARNING, 'jerror');
+                    JLog::add($db->getErrorMsg(), JLog::WARNING, 'jerror');
                     return false;
                 }
             }
         }
         else
         {
-            // TODO error: delete failed
+            // error: delete failed
+            JLog::add("Failed to clear matches of NuLiga table #$tableId!", JLog::WARNING, 'jerror');
+            JLog::add($db->getErrorMsg(), JLog::WARNING, 'jerror');
             return false;
         }
 
@@ -89,12 +93,12 @@ class NuLigaUpdateMatches
     /**
      * Removes all matches currently stored in the database for the current NuLiga table.
      *
+     * @param $db JDatabaseDriver dbo to be used
      * @param $tableId int NuLiga table id
      * @return bool true if the operation was successful, otherwise false
      */
-    protected static function removeMatches($tableId)
+    protected static function removeMatches($db, $tableId)
     {
-        $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
 
         $query->delete(self::DB_TABLE_NAME)

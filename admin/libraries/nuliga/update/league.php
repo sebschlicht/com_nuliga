@@ -65,7 +65,9 @@ class NuLigaUpdateLeague
                 $db->setQuery($query);
                 if (!$db->execute())
                 {
-                    // TODO error: insertion failed
+                    // error: insert failed
+                    JLog::add("Failed to insert league teams for NuLiga table #$tableId!", JLog::WARNING, 'jerror');
+                    JLog::add($db->getErrorMsg(), JLog::WARNING, 'jerror');
                     return false;
                 }
             }
@@ -82,7 +84,9 @@ class NuLigaUpdateLeague
 
                 if (!$db->execute())
                 {
-                    // TODO error: insertion failed
+                    // error: update failed
+                    JLog::add("Failed to update league teams for NuLiga table #$tableId!", JLog::WARNING, 'jerror');
+                    JLog::add($db->getErrorMsg(), JLog::WARNING, 'jerror');
                     return false;
                 }
             }

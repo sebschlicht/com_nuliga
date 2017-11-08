@@ -19,7 +19,7 @@ abstract class NuLigaHandlerBase
     /**
      * default update interval
      */
-    const DEFAULT_UPDATE_INTERVAL = 'PT30M';
+    const DEFAULT_UPDATE_INTERVAL = 'PT15M';
 
     /**
      * name of the table for NuLiga tables
@@ -84,24 +84,38 @@ abstract class NuLigaHandlerBase
                         ->where($db->quoteName('id') . ' = ' . $db->quote($table->id));
 
                     $db->setQuery($query);
-                    // TODO potential error: db update failed
-                    return $db->execute();
+                    if ($db->execute())
+                    {
+                        // update was successful
+                        return true;
+                    }
+                    else
+                    {
+                        // error: db update failed
+                        JLog::add("Failed to mark NuLiga table #$table->id as up-to-date!", JLog::WARNING, 'jerror');
+                        JLog::add($db->getErrorMsg(), JLog::WARNING, 'jerror');
+                        return false;
+                    }
                 }
                 else
                 {
-                    // TODO error: db update failed
+                    // error: db update failed
                     return false;
                 }
             }
             else
             {
-                // TODO error: parsing failed
+                // error: parsing failed
+                JLog::add("Failed to parse HTML of NuLiga table #$table->id from URL '$table->url'!", JLog::WARNING,
+                    'jerror');
                 return false;
             }
         }
         else
         {
-            // TODO error: download failed
+            // error: download failed
+            JLog::add("Failed to download HTML of NuLiga table #$table->id from URL '$table->url'!", JLog::WARNING,
+                'jerror');
             return false;
         }
     }
