@@ -28,6 +28,13 @@ class NuLigaUpdateMatches
         'reportUrl', 'isPlayed');
 
     /**
+     * NuLiga matches table types (if special parsing/formatting necessary)
+     */
+    const DB_TABLE_TYPES = array(
+        'date' => 'date'
+    );
+
+    /**
      * NuLiga matches table column: NuLiga table id
      */
     const DB_TABLE_COLUMN_TABLEID = 'tabid';
@@ -50,10 +57,10 @@ class NuLigaUpdateMatches
             $matches[$i][self::DB_TABLE_COLUMN_TABLEID] = $tableId;
         }
 
-        // insert/update matches
-        foreach ($matches as $match)
+        // re-insert matches
+        if (self::removeMatches($tableId))
         {
-            if (!self::isMatchExisting($tableId, $match['nr']))
+            foreach ($matches as $match)
             {
                 $values = self::getValues($db, $match);
 
@@ -69,50 +76,32 @@ class NuLigaUpdateMatches
                     return false;
                 }
             }
-            else
-            {
-                $fields = self::getFields($db, $match);
-
-                $query = $db->getQuery(true);
-                $query->update(self::DB_TABLE_NAME)
-                    ->set($fields)
-                    ->where($db->quoteName('nr') . ' = ' . $db->quote($match['nr']));
-
-                $db->setQuery($query);
-
-                if (!$db->execute())
-                {
-                    // TODO error: insertion failed
-                    return false;
-                }
-            }
         }
+        else
+        {
+            // TODO error: delete failed
+            return false;
+        }
+
         return true;
     }
 
     /**
-     * Checks if a match is existing in the respective table.
+     * Removes all matches currently stored in the database for the current NuLiga table.
      *
      * @param $tableId int NuLiga table id
-     * @param $nr string match number
-     * @return bool true if the match is existing, otherwise false
+     * @return bool true if the operation was successful, otherwise false
      */
-    protected static function isMatchExisting($tableId, $nr)
+    protected static function removeMatches($tableId)
     {
         $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
 
-        $query->select('COUNT(*)')
-            ->from(self::DB_TABLE_NAME)
-            ->where(array(
-                'nr = ' . $db->quote($nr),
-                'tabid = ' . $db->quote((int) $tableId)
-            ));
+        $query->delete(self::DB_TABLE_NAME)
+            ->where('tabid = ' . $db->quote((int) $tableId));
 
         $db->setQuery($query);
-        $result = $db->loadRow();
-
-        return is_array($result) ? (bool) $result[0] : false;
+        return $db->execute();
     }
 
     /**
@@ -127,25 +116,42 @@ class NuLigaUpdateMatches
         $values = array();
         foreach (self::DB_TABLE_COLUMNS as $column)
         {
-            array_push($values, $db->quote($array[$column]));
+            array_push($values, $db->quote(self::getValue($array, $column)));
         }
         return implode(',', $values);
     }
 
     /**
-     * Converts an array to an array which can be passed to the SQL set method.
+     * Retrieves a value from an array, respecting the respective table column's type.
      *
-     * @param $db object dbo
      * @param $array array array
-     * @return array fields array ([key = value])
+     * @param $key string respective table column name
+     * @return null|string formatted value or null on error
      */
-    protected static function getFields($db, $array)
+    protected static function getValue($array, $key)
     {
-        $fields = array();
-        foreach (self::DB_TABLE_COLUMNS as $column)
+        $value = $array[$key];
+        switch (self::DB_TABLE_TYPES[$key])
         {
-            array_push($fields, $db->quoteName($column) . ' = ' . $db->quote($array[$column]));
+            case 'date':
+                // date: format German date as SQL date
+                return self::germanToSqlDate($value);
+
+            default:
+                // default: text
+                return $value;
         }
-        return $fields;
+    }
+
+    /**
+     * Formats a German date as a SQL date.
+     *
+     * @param $date string German date
+     * @return null|string SQL date or null if given an invalid date
+     */
+    protected static function germanToSqlDate($date)
+    {
+        $datetime = DateTime::createFromFormat('d.m.Y', $date);
+        return $datetime ? $datetime->format('Y-m-d') : null;
     }
 }

@@ -30,7 +30,7 @@ class NuLigaParserMatches
         $dom = str_get_html($html);
 
         // load teams from DOM tree
-        $matchesTable = $dom->find('table.result-set', 0);
+        $matchesTable = $dom->find('table.result-set', 1);
         if ($matchesTable)
         {
             $matches = array();

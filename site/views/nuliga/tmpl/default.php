@@ -54,8 +54,8 @@ defined('_JEXEC') or die('Restricted access');
             <?php foreach($this->matches as $match): ?>
                 <tr>
                     <td><?php echo $match->weekday; ?></td>
-                    <td><?php echo $match->date; ?></td>
-                    <td><?php echo $match->time; ?></td>
+                    <td><?php echo $this->formatDate($match->date); ?></td>
+                    <td><?php echo $this->formatTime($match->time); ?></td>
                     <td><?php echo $match->hall; ?></td>
                     <td><?php echo $match->nr; ?></td>
                     <td><?php echo $match->home; ?></td>

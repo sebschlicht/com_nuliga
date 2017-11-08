@@ -64,9 +64,7 @@ class NuLigaViewNuLiga extends JViewLegacy
         }
         else
         {
-            echo 'loading matches:';
             $this->matches = $this->get('Matches');
-            echo count($this->matches) . ';';
         }
 
         // check for errors
@@ -81,5 +79,17 @@ class NuLigaViewNuLiga extends JViewLegacy
 
         // display template
         parent::display($tpl);
+    }
+
+    function formatDate($date)
+    {
+        $dateTime = date_create($date);
+        return $dateTime ? $dateTime->format('d.m.Y') : $date;
+    }
+
+    function formatTime($time)
+    {
+        $dateTime = DateTime::createFromFormat('H:i:s', $time);
+        return $dateTime ? $dateTime->format('H:i') : $time;
     }
 }
