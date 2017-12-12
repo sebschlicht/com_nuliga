@@ -82,7 +82,7 @@ class NuLigaModelNuLiga extends JModelItem
      * Loads a NuLiga table from the database. If necessary, the NuLiga table is updated.
      *
      * @param $id int table identifier
-     * @return JTable NuLiga table loaded
+     * @return JTable|null NuLiga table loaded or null if not existing
      */
     public function loadNuLigaTable($id)
     {
@@ -94,7 +94,9 @@ class NuLigaModelNuLiga extends JModelItem
 
         // load NuLiga table
         $this->_table = $this->getTable();
-        $this->_table->load($id);
+        if (!$this->_table->load($id)) {
+            return null;
+        }
 
         // trigger table update procedure
         NuLigaHandlerBase::init();
