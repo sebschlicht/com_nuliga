@@ -24,8 +24,8 @@ class NuLigaUpdateMatches
     /**
      * NuLiga matches table columns
      */
-    const DB_TABLE_COLUMNS = array('tabid', 'weekday', 'date', 'time', 'hall', 'nr', 'home', 'guest', 'goals',
-        'reportUrl', 'isPlayed');
+    const DB_TABLE_COLUMNS = array('tabid', 'position', 'weekday', 'date', 'time', 'hall', 'nr', 'home', 'guest',
+                                   'goals', 'reportUrl', 'isPlayed');
 
     /**
      * NuLiga matches table column: NuLiga table id
@@ -57,7 +57,8 @@ class NuLigaUpdateMatches
             {
                 // verify match validity
                 if (intval($match['nr']) <= 0) {
-                    JLog::add("Failed to insert match for NuLiga table #$tableId: Invalid match number '" . $match['nr'] . "'!", JLog::WARNING, 'jerror');
+                    JLog::add("Failed to insert match for NuLiga table #$tableId: Invalid match number '"
+                              . $match['nr'] . "'!", JLog::WARNING, 'jerror');
                     continue;
                 }
                 
@@ -101,7 +102,7 @@ class NuLigaUpdateMatches
         $query = $db->getQuery(true);
 
         $query->delete(self::DB_TABLE_NAME)
-            ->where('tabid = ' . $db->quote((int) $tableId));
+            ->where($db->quoteName(self::DB_TABLE_COLUMN_TABLEID) . ' = ' . $db->quote((int) $tableId));
 
         $db->setQuery($query);
         return $db->execute();

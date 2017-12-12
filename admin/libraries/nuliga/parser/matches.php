@@ -35,6 +35,7 @@ class NuLigaParserMatches
         {
             $matches = array();
             $isHeader = true;
+            $position = 1;
             foreach ($matchesTable->children() as $tr)
             {
                 // skip header row
@@ -46,6 +47,13 @@ class NuLigaParserMatches
 
                 // process match table row
                 $match = self::fromTableRow($tr);
+                
+                // inject position within NuLiga table
+                if (is_array($match)) {
+                    $match['position'] = $position;
+                }
+                $position += 1;
+                
                 array_push($matches, $match);
             }
             return $matches;

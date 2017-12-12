@@ -21,7 +21,7 @@ class NuLigaModelMatches extends JModelList
         if (empty($config['filter_fields']))
         {
             $config['filter_fields'] = array(
-                'nr',
+                'position',
                 'date',
                 'home',
                 'guest',
@@ -71,7 +71,7 @@ class NuLigaModelMatches extends JModelList
         }
 
         // ordering
-        $orderCol	= $this->state->get('list.ordering', 'm.nr');
+        $orderCol	= $this->state->get('list.ordering', 'm.position');
         $orderDirn 	= $this->state->get('list.direction', 'asc');
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
 

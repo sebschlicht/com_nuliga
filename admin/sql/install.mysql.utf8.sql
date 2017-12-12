@@ -38,6 +38,7 @@ CREATE TABLE `#__nuliga_leagueteams` (
 DROP TABLE IF EXISTS `#__nuliga_matches`;
 
 CREATE TABLE `#__nuliga_matches` (
+  `position` INT(11) NOT NULL,
   `tabid` INT(11) NOT NULL,
   `weekday` VARCHAR(3),
   `date` VARCHAR(64),
