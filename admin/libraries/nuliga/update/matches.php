@@ -28,13 +28,6 @@ class NuLigaUpdateMatches
         'reportUrl', 'isPlayed');
 
     /**
-     * NuLiga matches table types (if special parsing/formatting necessary)
-     */
-    const DB_TABLE_TYPES = array(
-        'date' => 'date'
-    );
-
-    /**
      * NuLiga matches table column: NuLiga table id
      */
     const DB_TABLE_COLUMN_TABLEID = 'tabid';
@@ -64,7 +57,7 @@ class NuLigaUpdateMatches
             {
                 // verify match validity
                 if (intval($match['nr']) <= 0) {
-                    JLog::add("Failed to insert match for NuLiga table #$tableId: Invalid match number!", JLog::WARNING, 'jerror');
+                    JLog::add("Failed to insert match for NuLiga table #$tableId: Invalid match number '" . $match['nr'] . "'!", JLog::WARNING, 'jerror');
                     continue;
                 }
                 
@@ -126,42 +119,8 @@ class NuLigaUpdateMatches
         $values = array();
         foreach (self::DB_TABLE_COLUMNS as $column)
         {
-            array_push($values, $db->quote(self::getValue($array, $column)));
+            array_push($values, $db->quote($array[$column]));
         }
         return implode(',', $values);
-    }
-
-    /**
-     * Retrieves a value from an array, respecting the respective table column's type.
-     *
-     * @param $array array array
-     * @param $key string respective table column name
-     * @return null|string formatted value or null on error
-     */
-    protected static function getValue($array, $key)
-    {
-        $value = $array[$key];
-        switch (self::DB_TABLE_TYPES[$key])
-        {
-            case 'date':
-                // date: format German date as SQL date
-                return self::germanToSqlDate($value);
-
-            default:
-                // default: text
-                return $value;
-        }
-    }
-
-    /**
-     * Formats a German date as a SQL date.
-     *
-     * @param $date string German date
-     * @return null|string SQL date or null if given an invalid date
-     */
-    protected static function germanToSqlDate($date)
-    {
-        $datetime = DateTime::createFromFormat('d.m.Y', $date);
-        return $datetime ? $datetime->format('Y-m-d') : null;
     }
 }

@@ -29,7 +29,7 @@ class NuLigaParserMatches
         // load DOM tree
         $dom = str_get_html($html);
 
-        // load teams from DOM tree
+        // load matches from DOM tree
         $matchesTable = $dom->find('table.result-set', 1);
         if ($matchesTable)
         {
@@ -88,8 +88,8 @@ class NuLigaParserMatches
       
         // exception: match without date
         if ($model['weekday'] == 'Termin offen') {
+            $model['date'] = $model['weekday'];
             $model['weekday'] = null;
-            $model['date'] = null;
             $model['time'] = null;
         }
 

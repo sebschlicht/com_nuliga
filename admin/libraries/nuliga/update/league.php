@@ -50,10 +50,9 @@ class NuLigaUpdateLeague
             $leagueteams[$i][self::DB_TABLE_COLUMN_TABLEID] = $tableId;
         }
 
-        // insert/update league teams
-        foreach ($leagueteams as $leagueteam)
-        {
-            if (!self::isLeagueteamExisting($tableId, $leagueteam['name']))
+        // re-insert league teams
+        if (self::removeLeagueTeams($db, $tableId)) {
+            foreach ($leagueteams as $leagueteam)
             {
                 $values = self::getValues($db, $leagueteam);
 
@@ -71,52 +70,26 @@ class NuLigaUpdateLeague
                     return false;
                 }
             }
-            else
-            {
-                $fields = self::getFields($db, $leagueteam);
-
-                $query = $db->getQuery(true);
-                $query->update(self::DB_TABLE_NAME)
-                    ->set($fields)
-                    ->where($db->quoteName('name') . ' = ' . $db->quote($leagueteam['name']));
-
-                $db->setQuery($query);
-
-                if (!$db->execute())
-                {
-                    // error: update failed
-                    JLog::add("Failed to update league teams for NuLiga table #$tableId!", JLog::WARNING, 'jerror');
-                    JLog::add($db->getErrorMsg(), JLog::WARNING, 'jerror');
-                    return false;
-                }
-            }
         }
         return true;
     }
-
+    
     /**
-     * Checks if a league team is existing in the respective table.
+     * Removes all legaue teams currently stored in the database for the current NuLiga table.
      *
+     * @param $db JDatabaseDriver dbo to be used
      * @param $tableId int NuLiga table id
-     * @param $name string team name
-     * @return bool true if the league team is existing, otherwise false
+     * @return bool true if the operation was successful, otherwise false
      */
-    protected static function isLeagueteamExisting($tableId, $name)
+    protected static function removeLeagueTeams($db, $tableId)
     {
-        $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
 
-        $query->select('COUNT(*)')
-            ->from(self::DB_TABLE_NAME)
-            ->where(array(
-                'name = ' . $db->quote($name),
-                'tabid = ' . $db->quote((int) $tableId)
-            ));
+        $query->delete(self::DB_TABLE_NAME)
+            ->where($db->quoteName(self::DB_TABLE_COLUMN_TABLEID) . ' = ' . $db->quote((int) $tableId));
 
         $db->setQuery($query);
-        $result = $db->loadRow();
-
-        return is_array($result) ? (bool) $result[0] : false;
+        return $db->execute();
     }
 
     /**
@@ -134,22 +107,5 @@ class NuLigaUpdateLeague
             array_push($values, $db->quote($array[$column]));
         }
         return implode(',', $values);
-    }
-
-    /**
-     * Converts an array to an array which can be passed to the SQL set method.
-     *
-     * @param $db object dbo
-     * @param $array array array
-     * @return array fields array ([key = value])
-     */
-    protected static function getFields($db, $array)
-    {
-        $fields = array();
-        foreach (self::DB_TABLE_COLUMNS as $column)
-        {
-            array_push($fields, $db->quoteName($column) . ' = ' . $db->quote($array[$column]));
-        }
-        return $fields;
     }
 }

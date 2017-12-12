@@ -39,9 +39,9 @@ DROP TABLE IF EXISTS `#__nuliga_matches`;
 
 CREATE TABLE `#__nuliga_matches` (
   `tabid` INT(11) NOT NULL,
-  `weekday` VARCHAR(3) NOT NULL,
-  `date` DATE NOT NULL,
-  `time` TIME NOT NULL,
+  `weekday` VARCHAR(3),
+  `date` VARCHAR(64),
+  `time` VARCHAR(16),
   `hall` VARCHAR(255) NOT NULL,
   `nr` INT(11) NOT NULL,
   `home` VARCHAR(64) NOT NULL,
