@@ -85,6 +85,13 @@ class NuLigaParserMatches
         {
             $model[$key] = self::getTableRowText($tr, $value);
         }
+      
+        // exception: match without date
+        if ($model['weekday'] == 'Termin offen') {
+          $model['weekday'] = null;
+          $model['date'] = null;
+          $model['time'] = null;
+        }
 
         return $model;
     }
@@ -94,10 +101,27 @@ class NuLigaParserMatches
      *
      * @param $tr object table row
      * @param $column int number of the column within the row
-     * @return string plain text of the specified cell
+     * @return string|null plain text of the specified cell or null if not existing
      */
     protected static function getTableRowText($tr, $column)
     {
-        return trim($tr->children($column)->plaintext);
+        $col = 0;
+        for ($i = 0; $i <= $column; $i++) {
+          $td = $tr->children($i);
+          $colspan = $td->colspan;
+          if (empty($colspan)) {
+            $colspan = 1;
+          }
+          $col += $colspan;
+          $v = trim($td->plaintext);
+          
+          
+          // check if target column reached
+          if ($col > $column) {
+            return $v;
+          }
+        }
+      
+        return null;
     }
 }
