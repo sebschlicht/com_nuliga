@@ -62,6 +62,12 @@ class NuLigaUpdateMatches
         {
             foreach ($matches as $match)
             {
+                // verify match validity
+                if (intval($match['nr']) <= 0) {
+                    JLog::add("Failed to insert match for NuLiga table #$tableId: Invalid match number!", JLog::WARNING, 'jerror');
+                    continue;
+                }
+                
                 $values = self::getValues($db, $match);
 
                 $query = $db->getQuery(true);
