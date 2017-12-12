@@ -16,7 +16,7 @@
     </updateservers>
 
     <!--  The version string is recorded in the components table -->
-    <version>0.0.21</version>
+    <version>0.0.22</version>
 
     <!-- The description is optional and defaults to the name -->
     <description>COM_NULIGA_DESCRIPTION</description>
