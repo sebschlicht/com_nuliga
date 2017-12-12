@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS `#__nuliga`;
 
 CREATE TABLE `#__nuliga` (
   `id`       INT(11)     NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(25) NOT NULL,
+  `title` VARCHAR(64) NOT NULL,
   `type` TINYINT NOT NULL DEFAULT '1',
   `url` VARCHAR(255) NOT NULL,
   `published` tinyint(4) NOT NULL DEFAULT '1',

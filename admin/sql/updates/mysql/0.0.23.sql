@@ -1,0 +1,2 @@
+ALTER TABLE `#__nuliga`
+  MODIFY COLUMN `title` VARCHAR(64) NOT NULL;
