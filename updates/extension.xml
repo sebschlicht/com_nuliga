@@ -1,7 +1,7 @@
 <updates>
     <update>
         <name>NuLiga Beta</name>
-        <version>0.0.26</version>
+        <version>0.0.27</version>
         <downloads>
             <downloadurl type="full" format="zip">http://dev.jablab.de/updates/com_nuliga/com_nuliga.zip</downloadurl>
         </downloads>
