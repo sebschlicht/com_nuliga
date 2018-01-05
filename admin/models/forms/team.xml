@@ -23,7 +23,7 @@
                 size="40"
                 class="inputbox"
                 validate="url"
-                required="true"
+                required="false"
                 default=""
         />
         <field
@@ -44,7 +44,7 @@
                 size="40"
                 class="inputbox"
                 validate="url"
-                required="true"
+                required="false"
                 default=""
         />
     </fieldset>
