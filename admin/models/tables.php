@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  com_nuliga
  * @since  0.0.7
  */
-class NuLigaModelNuLigas extends JModelList
+class NuLigaModelTables extends JModelList
 {
     /**
      * Constructor.
@@ -97,8 +97,8 @@ class NuLigaModelNuLigas extends JModelList
 
         // load types
         $types = [
-            1 => JText::_('COM_NULIGA_NULIGA_FIELD_TYPE_VALUE_TABLE'),
-            2 => JText::_('COM_NULIGA_NULIGA_FIELD_TYPE_VALUE_MATCHES')
+            1 => JText::_('COM_NULIGA_TABLE_FIELD_TYPE_VALUE_TABLE'),
+            2 => JText::_('COM_NULIGA_TABLE_FIELD_TYPE_VALUE_MATCHES')
         ];
 
         // replace type id with text value

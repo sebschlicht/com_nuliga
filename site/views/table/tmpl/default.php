@@ -15,15 +15,15 @@ defined('_JEXEC') or die('Restricted access');
     <?php if ($this->type == 1 && $this->teams): ?>
         <table>
         <tr>
-            <th><?php echo JText::_('COM_NULIGA_NULIGA_LEAGUE_COLUMN_HEADER_RANK');?></th>
-            <th><?php echo JText::_('COM_NULIGA_NULIGA_LEAGUE_COLUMN_HEADER_TEAM');?></th>
-            <th><?php echo JText::_('COM_NULIGA_NULIGA_LEAGUE_COLUMN_HEADER_NUMMATCHES');?></th>
-            <th><?php echo JText::_('COM_NULIGA_NULIGA_LEAGUE_COLUMN_HEADER_NUMWINS');?></th>
-            <th><?php echo JText::_('COM_NULIGA_NULIGA_LEAGUE_COLUMN_HEADER_NUMDRAWS');?></th>
-            <th><?php echo JText::_('COM_NULIGA_NULIGA_LEAGUE_COLUMN_HEADER_NUMLOSSES');?></th>
-            <th><?php echo JText::_('COM_NULIGA_NULIGA_LEAGUE_COLUMN_HEADER_GOALS');?></th>
-            <th><?php echo JText::_('COM_NULIGA_NULIGA_LEAGUE_COLUMN_HEADER_GOALDIFF');?></th>
-            <th><?php echo JText::_('COM_NULIGA_NULIGA_LEAGUE_COLUMN_HEADER_POINTS');?></th>
+            <th><?php echo JText::_('COM_NULIGA_TABLE_LEAGUE_COLUMN_HEADER_RANK');?></th>
+            <th><?php echo JText::_('COM_NULIGA_TABLE_LEAGUE_COLUMN_HEADER_TEAM');?></th>
+            <th><?php echo JText::_('COM_NULIGA_TABLE_LEAGUE_COLUMN_HEADER_NUMMATCHES');?></th>
+            <th><?php echo JText::_('COM_NULIGA_TABLE_LEAGUE_COLUMN_HEADER_NUMWINS');?></th>
+            <th><?php echo JText::_('COM_NULIGA_TABLE_LEAGUE_COLUMN_HEADER_NUMDRAWS');?></th>
+            <th><?php echo JText::_('COM_NULIGA_TABLE_LEAGUE_COLUMN_HEADER_NUMLOSSES');?></th>
+            <th><?php echo JText::_('COM_NULIGA_TABLE_LEAGUE_COLUMN_HEADER_GOALS');?></th>
+            <th><?php echo JText::_('COM_NULIGA_TABLE_LEAGUE_COLUMN_HEADER_GOALDIFF');?></th>
+            <th><?php echo JText::_('COM_NULIGA_TABLE_LEAGUE_COLUMN_HEADER_POINTS');?></th>
         </tr>
         <?php foreach($this->teams as $team): ?>
             <tr<?php if (in_array($team->name, $this->highlight)) echo ' class="highlight"'; ?>>
@@ -42,14 +42,14 @@ defined('_JEXEC') or die('Restricted access');
     <?php elseif ($this->type == 2 && $this->matches): ?>
         <table>
             <tr>
-                <th><?php echo JText::_('COM_NULIGA_NULIGA_MATCHES_COLUMN_HEADER_WEEKDAY');?></th>
-                <th><?php echo JText::_('COM_NULIGA_NULIGA_MATCHES_COLUMN_HEADER_DATE');?></th>
-                <th><?php echo JText::_('COM_NULIGA_NULIGA_MATCHES_COLUMN_HEADER_TIME');?></th>
-                <th><?php echo JText::_('COM_NULIGA_NULIGA_MATCHES_COLUMN_HEADER_HALL');?></th>
-                <th><?php echo JText::_('COM_NULIGA_NULIGA_MATCHES_COLUMN_HEADER_NULIGAID');?></th>
-                <th><?php echo JText::_('COM_NULIGA_NULIGA_MATCHES_COLUMN_HEADER_HOME');?></th>
-                <th><?php echo JText::_('COM_NULIGA_NULIGA_MATCHES_COLUMN_HEADER_GUEST');?></th>
-                <th><?php echo JText::_('COM_NULIGA_NULIGA_MATCHES_COLUMN_HEADER_RESULT');?></th>
+                <th><?php echo JText::_('COM_NULIGA_TABLE_MATCHES_COLUMN_HEADER_WEEKDAY');?></th>
+                <th><?php echo JText::_('COM_NULIGA_TABLE_MATCHES_COLUMN_HEADER_DATE');?></th>
+                <th><?php echo JText::_('COM_NULIGA_TABLE_MATCHES_COLUMN_HEADER_TIME');?></th>
+                <th><?php echo JText::_('COM_NULIGA_TABLE_MATCHES_COLUMN_HEADER_HALL');?></th>
+                <th><?php echo JText::_('COM_NULIGA_TABLE_MATCHES_COLUMN_HEADER_NULIGAID');?></th>
+                <th><?php echo JText::_('COM_NULIGA_TABLE_MATCHES_COLUMN_HEADER_HOME');?></th>
+                <th><?php echo JText::_('COM_NULIGA_TABLE_MATCHES_COLUMN_HEADER_GUEST');?></th>
+                <th><?php echo JText::_('COM_NULIGA_TABLE_MATCHES_COLUMN_HEADER_RESULT');?></th>
             </tr>
             <?php foreach($this->matches as $match): ?>
                 <tr>
@@ -65,6 +65,6 @@ defined('_JEXEC') or die('Restricted access');
             <?php endforeach; ?>
         </table>
     <?php else: ?>
-    <p><?php echo JText::_('COM_NULIGA_NULIGA_RENDERING_FAILURE');?></p>
+    <p><?php echo JText::_('COM_NULIGA_TABLE_RENDERING_FAILURE');?></p>
     <?php endif; ?>
 </div>

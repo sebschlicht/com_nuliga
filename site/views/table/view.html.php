@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  com_nuliga
  * @since  0.0.2
  */
-class NuLigaViewNuLiga extends JViewLegacy
+class NuLigaViewTable extends JViewLegacy
 {
     /**
      * @var string team title

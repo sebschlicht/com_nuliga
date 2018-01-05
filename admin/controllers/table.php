@@ -16,6 +16,6 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  com_nuliga
  * @since       0.0.9
  */
-class NuLigaControllerNuLiga extends JControllerForm
+class NuLigaControllerTable extends JControllerForm
 {
 }
