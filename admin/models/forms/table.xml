@@ -8,8 +8,8 @@
         <field
                 name="title"
                 type="text"
-                label="COM_NULIGA_NULIGA_FIELD_TITLE_LABEL"
-                description="COM_NULIGA_NULIGA_FIELD_TITLE_DESC"
+                label="COM_NULIGA_TABLE_FIELD_TITLE_LABEL"
+                description="COM_NULIGA_TABLE_FIELD_TITLE_DESC"
                 size="40"
                 class="inputbox"
                 required="true"
@@ -18,17 +18,17 @@
         <field
                 name="type"
                 type="list"
-                label="COM_NULIGA_NULIGA_FIELD_TYPE_LABEL"
-                description="COM_NULIGA_NULIGA_FIELD_TYPE_DESC"
+                label="COM_NULIGA_TABLE_FIELD_TYPE_LABEL"
+                description="COM_NULIGA_TABLE_FIELD_TYPE_DESC"
                 default="1">
-            <option value="1">COM_NULIGA_NULIGA_FIELD_TYPE_VALUE_TABLE</option>
-            <option value="2">COM_NULIGA_NULIGA_FIELD_TYPE_VALUE_MATCHES</option>
+            <option value="1">COM_NULIGA_TABLE_FIELD_TYPE_VALUE_TABLE</option>
+            <option value="2">COM_NULIGA_TABLE_FIELD_TYPE_VALUE_MATCHES</option>
         </field>
         <field
                 name="url"
                 type="text"
-                label="COM_NULIGA_NULIGA_FIELD_URL_LABEL"
-                description="COM_NULIGA_NULIGA_FIELD_URL_DESC"
+                label="COM_NULIGA_TABLE_FIELD_URL_LABEL"
+                description="COM_NULIGA_TABLE_FIELD_URL_DESC"
                 size="40"
                 class="inputbox"
                 validate="url"
@@ -38,8 +38,8 @@
         <field
                 name="last_update"
                 type="calendar"
-                label="COM_NULIGA_NULIGA_FIELD_LASTUPDATE_LABEL"
-                description="COM_NULIGA_NULIGA_FIELD_LASTUPDATE_DESC"
+                label="COM_NULIGA_TABLE_FIELD_LASTUPDATE_LABEL"
+                description="COM_NULIGA_TABLE_FIELD_LASTUPDATE_DESC"
                 translateformat="true"
                 showtime="true"
                 default=""

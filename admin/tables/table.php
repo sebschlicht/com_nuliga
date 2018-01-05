@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  com_nuliga
  * @since  0.0.6
  */
-class NuLigaTableNuLiga extends JTable
+class NuLigaTableTable extends JTable
 {
     /**
      * Constructor

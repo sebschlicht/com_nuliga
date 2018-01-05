@@ -14,7 +14,7 @@ JHtml::_('formbehavior.chosen', 'select');
 $listOrder     = $this->escape($this->filter_order);
 $listDirn      = $this->escape($this->filter_order_Dir);
 ?>
-<form action="index.php?option=com_nuliga&view=nuligas" method="post" id="adminForm" name="adminForm">
+<form action="index.php?option=com_nuliga&view=tables" method="post" id="adminForm" name="adminForm">
     <div class="row-fluid">
         <div class="span6">
             <?php
@@ -33,16 +33,16 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
             <th width="25%">
-                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_TITLE', 'title', $listDirn, $listOrder); ?>
+                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_TABLES_TITLE', 'title', $listDirn, $listOrder); ?>
             </th>
             <th width="17%">
-                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_TYPE', 'type', $listDirn, $listOrder); ?>
+                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_TABLES_TYPE', 'type', $listDirn, $listOrder); ?>
             </th>
             <th width="35%">
-                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_URL', 'url', $listDirn, $listOrder); ?>
+                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_TABLES_URL', 'url', $listDirn, $listOrder); ?>
             </th>
             <th width="10%">
-                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_NULIGAS_LASTUPDATE', 'last_update', $listDirn, $listOrder); ?>
+                <?php echo JHtml::_('grid.sort', 'COM_NULIGA_TABLES_LASTUPDATE', 'last_update', $listDirn, $listOrder); ?>
             </th>
             <th width="5%">
                 <?php echo JHtml::_('grid.sort', 'COM_NULIGA_PUBLISHED', 'published', $listDirn, $listOrder); ?>
@@ -62,7 +62,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
         <tbody>
         <?php if (!empty($this->items)) : ?>
             <?php foreach ($this->items as $i => $row) :
-                $link = JRoute::_('index.php?option=com_nuliga&task=nuliga.edit&id=' . $row->id);
+                $link = JRoute::_('index.php?option=com_nuliga&task=table.edit&id=' . $row->id);
             ?>
 
                 <tr>
@@ -73,7 +73,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                         <?php echo JHtml::_('grid.id', $i, $row->id); ?>
                     </td>
                     <td>
-                        <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_NULIGA_EDIT_NULIGA'); ?>">
+                        <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_NULIGA_EDIT_TABLE'); ?>">
                             <?php echo $row->title; ?>
                         </a>
                     </td>
@@ -87,7 +87,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                         <?php echo $row->last_update; ?>
                     </td>
                     <td align="center">
-                        <?php echo JHtml::_('jgrid.published', $row->published, $i, 'nuligas.', true, 'cb'); ?>
+                        <?php echo JHtml::_('jgrid.published', $row->published, $i, 'tables.', true, 'cb'); ?>
                     </td>
                     <td align="center">
                         <?php echo $row->id; ?>

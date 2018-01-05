@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  com_nuliga
  * @since  0.0.9
  */
-class NuLigaModelNuLiga extends JModelAdmin
+class NuLigaModelTable extends JModelAdmin
 {
     /**
      * Method to get a table object, load it if necessary.
@@ -29,7 +29,7 @@ class NuLigaModelNuLiga extends JModelAdmin
      *
      * @since   1.6
      */
-    public function getTable($type = 'NuLiga', $prefix = 'NuLigaTable', $config = array())
+    public function getTable($type = 'Table', $prefix = 'NuLigaTable', $config = array())
     {
         return JTable::getInstance($type, $prefix, $config);
     }
@@ -48,8 +48,8 @@ class NuLigaModelNuLiga extends JModelAdmin
     {
         // load form
         $form = $this->loadForm(
-            'com_nuliga.nuliga',
-            'nuliga',
+            'com_nuliga.table',
+            'table',
             array(
                 'control' => 'jform',
                 'load_data' => $loadData
@@ -70,7 +70,7 @@ class NuLigaModelNuLiga extends JModelAdmin
     {
         // check session for previously entered form data
         $data = JFactory::getApplication()->getUserState(
-            'com_nuliga.edit.nuliga.data',
+            'com_nuliga.edit.table.data',
             array()
         );
 

@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  com_nuliga
  * @since  0.0.9
  */
-class NuLigaControllerNuLigas extends JControllerAdmin
+class NuLigaControllerTables extends JControllerAdmin
 {
     /**
      * Proxy for getModel.
@@ -29,7 +29,7 @@ class NuLigaControllerNuLigas extends JControllerAdmin
      *
      * @since   1.6
      */
-    public function getModel($name = 'NuLiga', $prefix = 'NuLigaModel', $config = array('ignore_request' => true))
+    public function getModel($name = 'Table', $prefix = 'NuLigaModel', $config = array('ignore_request' => true))
     {
         $model = parent::getModel($name, $prefix, $config);
 

@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  com_nuliga
  * @since  0.0.9
  */
-class NuLigaViewNuLiga extends JViewLegacy
+class NuLigaViewTable extends JViewLegacy
 {
     /**
      * form to edit NuLiga tables
@@ -72,13 +72,13 @@ class NuLigaViewNuLiga extends JViewLegacy
 
         // set title depending on item action
         $isNew = ($this->item->id == 0);
-        $title = JText::_($isNew ? 'COM_NULIGA_MANAGER_NULIGA_NEW' : 'COM_NULIGA_MANAGER_NULIGA_EDIT');
+        $title = JText::_($isNew ? 'COM_NULIGA_MANAGER_TABLE_NEW' : 'COM_NULIGA_MANAGER_TABLE_EDIT');
 
         // add tool bar components
-        JToolbarHelper::title($title, 'nuliga');
-        JToolbarHelper::save('nuliga.save');
+        JToolbarHelper::title($title, 'table');
+        JToolbarHelper::save('table.save');
         JToolbarHelper::cancel(
-            'nuliga.cancel',
+            'table.cancel',
             $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE'
         );
     }
@@ -92,6 +92,6 @@ class NuLigaViewNuLiga extends JViewLegacy
     {
         $isNew = ($this->item->id < 1);
         $document = JFactory::getDocument();
-        $document->setTitle(JText::_($isNew ? 'COM_NULIGA_NULIGA_CREATING' : 'COM_NULIGA_NULIGA_EDITING'));
+        $document->setTitle(JText::_($isNew ? 'COM_NULIGA_TABLE_CREATING' : 'COM_NULIGA_TABLE_EDITING'));
     }
 }

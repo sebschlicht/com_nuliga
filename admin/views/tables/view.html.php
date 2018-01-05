@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  com_nuliga
  * @since  0.0.7
  */
-class NuLigaViewNuLigas extends JViewLegacy
+class NuLigaViewTables extends JViewLegacy
 {
     /**
      * Displays the NuLiga table list view.
@@ -29,7 +29,7 @@ class NuLigaViewNuLigas extends JViewLegacy
     {
         // get application
         $app = JFactory::getApplication();
-        $context = "nuliga.list.admin.nuliga";
+        $context = "nuliga.list.admin.table";
 
         // get model data
         $this->items		= $this->get('Items');
@@ -64,9 +64,9 @@ class NuLigaViewNuLigas extends JViewLegacy
      */
     protected function addToolBar()
     {
-        JToolbarHelper::title(JText::_('COM_NULIGA_MANAGER_NULIGAS'), 'nuliga');
-        JToolbarHelper::addNew('nuliga.add');
-        JToolbarHelper::editList('nuliga.edit');
-        JToolbarHelper::deleteList('', 'nuligas.delete');
+        JToolbarHelper::title(JText::_('COM_NULIGA_MANAGER_TABLES'), 'table');
+        JToolbarHelper::addNew('table.add');
+        JToolbarHelper::editList('table.edit');
+        JToolbarHelper::deleteList('', 'tables.delete');
     }
 }

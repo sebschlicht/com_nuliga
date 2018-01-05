@@ -10,7 +10,6 @@
 defined('_JEXEC') or die('Restricted access');
 
 // TODO deploy library files to ROOT/libraries
-//JLoader::registerPrefix('NuLiga', JPATH_LIBRARIES . '/nuliga');
 JLoader::registerPrefix('NuLiga', JPATH_ADMINISTRATOR . '/components/com_nuliga/libraries/nuliga');
 
 /**
@@ -20,7 +19,7 @@ JLoader::registerPrefix('NuLiga', JPATH_ADMINISTRATOR . '/components/com_nuliga/
  * @subpackage  com_nuliga
  * @since  0.0.4
  */
-class NuLigaModelNuLiga extends JModelItem
+class NuLigaModelTable extends JModelItem
 {
     /**
      * @var JTable NuLiga table
@@ -48,7 +47,7 @@ class NuLigaModelNuLiga extends JModelItem
      *
      * @since   1.6
      */
-    public function getTable($type = 'NuLiga', $prefix = 'NuLigaTable', $config = array())
+    public function getTable($type = 'Table', $prefix = 'NuLigaTable', $config = array())
     {
         return JTable::getInstance($type, $prefix, $config);
     }

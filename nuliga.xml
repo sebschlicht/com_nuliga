@@ -16,7 +16,7 @@
     </updateservers>
 
     <!--  The version string is recorded in the components table -->
-    <version>0.0.27</version>
+    <version>0.0.28</version>
 
     <!-- The description is optional and defaults to the name -->
     <description>COM_NULIGA_DESCRIPTION</description>
@@ -66,6 +66,12 @@
     <administration>
         <!-- Administration Menu Section -->
         <menu link='index.php?option=com_nuliga'>COM_NULIGA_MENU</menu>
+        <submenu>
+          <menu img='media/com_nuliga/images/Tux-16x16.png'
+                link='option=com_nuliga&amp;view=teams' view='teams'>COM_NULIGA_MENU_TEAMS</menu>
+          <menu img='media/com_nuliga/images/Tux-16x16.png'
+                link='option=com_nuliga&amp;view=tables' view='tables'>COM_NULIGA_MENU_TABLES</menu>
+        </submenu>
         <!-- Administration Main File Copy Section -->
         <!-- Note the folder attribute: This attribute describes the folder
             to copy FROM in the package to install therefore files copied
