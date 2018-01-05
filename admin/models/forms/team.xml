@@ -33,7 +33,7 @@
                 description="COM_NULIGA_TEAM_FIELD_LEAGUE_DESC"
                 size="40"
                 class="inputbox"
-                required="true"
+                required="false"
                 default=""
         />
         <field
