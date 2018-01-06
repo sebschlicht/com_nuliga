@@ -24,7 +24,7 @@ abstract class NuLigaHandlerBase
     /**
      * name of the table for NuLiga teams
      */
-    const DB_TABLE_NAME_TEAMS = '#__nuliga_teams';
+    protected static $dbTableTeams = '#__nuliga_teams';
 
     /**
      * @var array registered NuLiga table handlers
@@ -47,14 +47,9 @@ abstract class NuLigaHandlerBase
     protected $updater;
     
     /**
-     * @var string name of the database column holding the last update timestamp
+     * @var string name of the database column for the last update timestamp
      */
     protected $lastUpdateDbField;
-    
-    /**
-     * @var string name of the database column holding the URL
-     */
-    protected $urlField;
 
     /**
      * Basic constructor of a NuLiga table handler.
@@ -66,7 +61,23 @@ abstract class NuLigaHandlerBase
         $this->updateInterval = $updateInterval != null ? $updateInterval
             : new DateInterval(self::DEFAULT_UPDATE_INTERVAL);
     }
-
+    
+    /**
+     * Retrieves the download URL of remote content for a team.
+     *
+     * @param JTable team
+     * @return string URL to the remote content
+     */
+    abstract protected function getUrl($team);
+    
+    /**
+     * Retrieves the timestamp of the last update for a team.
+     *
+     * @param JTable team
+     * @return string DateTime-string of the last update
+     */
+    abstract protected function getLastUpdate($team);
+    
     /**
      * Performs an update for a NuLiga team.
      *
@@ -75,7 +86,7 @@ abstract class NuLigaHandlerBase
      */
     public function update($team)
     {
-        $url = $team[$this->urlField];
+        $url = $this->getUrl($team);
         $html = self::getRemoteContent($url);
         if ($html)
         {
@@ -90,11 +101,11 @@ abstract class NuLigaHandlerBase
                     $query = $db->getQuery(true);
 
                     $now = new DateTime();
-                    $query->update(self::DB_TABLE_NAME_TEAMS)
+                    $query->update(static::$dbTableTeams)
                         ->set($db->quoteName($this->lastUpdateDbField) . ' = ' . $db->quote($now->format('Y-m-d H:i:s')))
                         ->where($db->quoteName('id') . ' = ' . $db->quote($team->id));
 
-                    $db->setQuery($query);
+                    $db->setQuery($query);                    
                     if ($db->execute())
                     {
                         // update was successful
@@ -117,7 +128,7 @@ abstract class NuLigaHandlerBase
             else
             {
                 // error: parsing failed
-                JLog::add("Failed to parse HTML of NuLiga team #$team->id from URL '$table->url'!", JLog::WARNING,
+                JLog::add("Failed to parse HTML of NuLiga team #$team->id from URL '$team->url'!", JLog::WARNING,
                     'jerror');
                 return false;
             }
@@ -125,7 +136,7 @@ abstract class NuLigaHandlerBase
         else
         {
             // error: download failed
-            JLog::add("Failed to download HTML of NuLiga team #$team->id from URL '$table->url'!", JLog::WARNING,
+            JLog::add("Failed to download HTML of NuLiga team #$team->id ($team->title) from URL '$team->url'!", JLog::WARNING,
                 'jerror');
             return false;
         }
@@ -139,13 +150,14 @@ abstract class NuLigaHandlerBase
      */
     public function isUpdateRequired($team)
     {
-        if (empty($team[$this->urlField]))
+        if (empty($this->getUrl($team)))
         {
             return false;
         }
         
         $now = new DateTime('now');
-        $lastUpdate = empty($team[$this->lastUpdateDbField]) ? null : new DateTime($team[$this->lastUpdateDbField]);
+        $lastUpdate = $this->getLastUpdate($team);
+        $lastUpdate = empty($lastUpdate) ? null : new DateTime($lastUpdate);
         return ($lastUpdate === null || $now->sub($this->updateInterval) > $lastUpdate);
     }
 

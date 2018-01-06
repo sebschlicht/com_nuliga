@@ -22,6 +22,15 @@ class NuLigaHandlerMatches extends NuLigaHandlerBase
         $this->parser = new NuLigaParserMatches();
         $this->updater = new NuLigaUpdateMatches();
         $this->lastUpdateDbField = 'last_update_portrait';
-        $this->urlField = 'urlPortrait';
+    }
+    
+    protected function getUrl($team)
+    {
+        return $team->urlPortrait;
+    }
+    
+    protected function getLastUpdate($team)
+    {
+        return $team->last_update_portrait;
     }
 }

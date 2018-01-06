@@ -22,6 +22,15 @@ class NuLigaHandlerLeague extends NuLigaHandlerBase
         $this->parser = new NuLigaParserLeague();
         $this->updater = new NuLigaUpdateLeague();
         $this->lastUpdateDbField = 'last_update_league';
-        $this->urlField = 'urlLeague';
+    }
+    
+    protected function getUrl($team)
+    {
+        return $team->urlLeague;
+    }
+    
+    protected function getLastUpdate($team)
+    {
+        return $team->last_update_league;
     }
 }

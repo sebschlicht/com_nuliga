@@ -81,6 +81,7 @@ abstract class NuLigaUpdateBase
                 // verify item
                 if (!$this->validate($item))
                 {
+                    var_dump($item);
                     continue;
                 }
                 
@@ -94,6 +95,9 @@ abstract class NuLigaUpdateBase
                     ->values($values);
 
                 $db->setQuery($query);
+                echo "db query: '$query' ";
+                continue;
+                
                 if (!$db->execute())
                 {
                     // error: insertion failed
@@ -126,7 +130,8 @@ abstract class NuLigaUpdateBase
             ->where($db->quoteName($this->dbColumnTeam) . ' = ' . $db->quote((int) $teamId));
 
         $db->setQuery($query);
-        return $db->execute();
+        //return $db->execute(); TODO undo
+        return true;
     }
     
     /**

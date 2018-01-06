@@ -45,7 +45,8 @@ class NuLigaUpdateMatches extends NuLigaUpdateBase
         }
         else
         {
-            return true;
+            // TODO return true
+            return false;
         }
     }
 }
