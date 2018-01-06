@@ -1,3 +1,7 @@
+-- nuliga tables have been removed
+DROP TABLE IF EXISTS `#__nuliga`;
+
+-- rebuild league team table to match new hierarchy (team 1->* leagueteam)
 DROP TABLE IF EXISTS `#__nuliga_leagueteams`;
 
 CREATE TABLE `#__nuliga_leagueteams` (
@@ -20,6 +24,7 @@ CREATE TABLE `#__nuliga_leagueteams` (
   AUTO_INCREMENT =0
   DEFAULT CHARSET =utf8;
 
+-- rebuild match table to match new hierarchy (team 1->* match)
 DROP TABLE IF EXISTS `#__nuliga_matches`;
 
 CREATE TABLE `#__nuliga_matches` (
@@ -43,21 +48,3 @@ CREATE TABLE `#__nuliga_matches` (
   ENGINE =MyISAM
   AUTO_INCREMENT =0
   DEFAULT CHARSET =utf8;
-
-DROP TABLE IF EXISTS `#__nuliga_teams`;
-
-CREATE TABLE `#__nuliga_teams` (
-  `id`       INT(11)     NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(64) NOT NULL,
-  `urlPortrait` VARCHAR(255),
-  `last_update_portrait` DATETIME,
-  `league` VARCHAR(255) NOT NULL,
-  `urlLeague` VARCHAR(255),
-  `last_update_league` DATETIME,
-  `published` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-)
-  ENGINE =MyISAM
-  AUTO_INCREMENT =0
-  DEFAULT CHARSET =utf8;
-

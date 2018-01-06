@@ -22,9 +22,9 @@ abstract class NuLigaHandlerBase
     const DEFAULT_UPDATE_INTERVAL = 'PT15M';
 
     /**
-     * name of the table for NuLiga tables
+     * name of the table for NuLiga teams
      */
-    const DB_TABLE_NULIGA_NAME = '#__nuliga';
+    const DB_TABLE_NAME_TEAMS = '#__nuliga_teams';
 
     /**
      * @var array registered NuLiga table handlers
@@ -45,6 +45,16 @@ abstract class NuLigaHandlerBase
      * @var object DB synchronizer
      */
     protected $updater;
+    
+    /**
+     * @var string name of the database column holding the last update timestamp
+     */
+    protected $lastUpdateDbField;
+    
+    /**
+     * @var string name of the database column holding the URL
+     */
+    protected $urlField;
 
     /**
      * Basic constructor of a NuLiga table handler.
@@ -58,30 +68,31 @@ abstract class NuLigaHandlerBase
     }
 
     /**
-     * Performs an update for a NuLiga table.
+     * Performs an update for a NuLiga team.
      *
-     * @param $table JTable NuLiga table
+     * @param $table JTable NuLiga team
      * @return bool true if the update has been successful
      */
-    public function update($table)
+    public function update($team)
     {
-        $html = self::getRemoteContent($table->url);
+        $url = $team[$this->urlField];
+        $html = self::getRemoteContent($url);
         if ($html)
         {
             $model = $this->parser->parseHtml($html);
             if ($model)
             {
                 // sync DB via updater
-                if ($this->updater->update($table->id, $model))
+                if ($this->updater->update($team->id, $model))
                 {
                     // update last_update timestamp
                     $db = JFactory::getDbo();
                     $query = $db->getQuery(true);
 
                     $now = new DateTime();
-                    $query->update(self::DB_TABLE_NULIGA_NAME)
-                        ->set($db->quoteName('last_update') . ' = ' . $db->quote($now->format('Y-m-d H:i:s')))
-                        ->where($db->quoteName('id') . ' = ' . $db->quote($table->id));
+                    $query->update(self::DB_TABLE_NAME_TEAMS)
+                        ->set($db->quoteName($this->lastUpdateDbField) . ' = ' . $db->quote($now->format('Y-m-d H:i:s')))
+                        ->where($db->quoteName('id') . ' = ' . $db->quote($team->id));
 
                     $db->setQuery($query);
                     if ($db->execute())
@@ -92,7 +103,7 @@ abstract class NuLigaHandlerBase
                     else
                     {
                         // error: db update failed
-                        JLog::add("Failed to mark NuLiga table #$table->id as up-to-date!", JLog::WARNING, 'jerror');
+                        JLog::add("Failed to mark NuLiga team #$team->id as up-to-date!", JLog::WARNING, 'jerror');
                         JLog::add($db->getErrorMsg(), JLog::WARNING, 'jerror');
                         return false;
                     }
@@ -106,7 +117,7 @@ abstract class NuLigaHandlerBase
             else
             {
                 // error: parsing failed
-                JLog::add("Failed to parse HTML of NuLiga table #$table->id from URL '$table->url'!", JLog::WARNING,
+                JLog::add("Failed to parse HTML of NuLiga team #$team->id from URL '$table->url'!", JLog::WARNING,
                     'jerror');
                 return false;
             }
@@ -114,23 +125,28 @@ abstract class NuLigaHandlerBase
         else
         {
             // error: download failed
-            JLog::add("Failed to download HTML of NuLiga table #$table->id from URL '$table->url'!", JLog::WARNING,
+            JLog::add("Failed to download HTML of NuLiga team #$team->id from URL '$table->url'!", JLog::WARNING,
                 'jerror');
             return false;
         }
     }
 
     /**
-     * Checks whether a table's last update is longer ago than the configured update interval.
+     * Checks whether a team's last update is longer ago than the configured update interval.
      *
-     * @param $table JTable table with a `last_update` column
-     * @return bool true if an update is required
+     * @param $team JTable team with the respective timestamp column
+     * @return bool true if an update is required, false if not or not possible due to lacking URL
      */
-    public function isUpdateRequired($table)
+    public function isUpdateRequired($team)
     {
+        if (empty($team[$this->urlField]))
+        {
+            return false;
+        }
+        
         $now = new DateTime('now');
-        $tableDate = empty($table->last_update) ? null : new DateTime($table->last_update);
-        return ($tableDate === null || $now->sub($this->updateInterval) > $tableDate);
+        $lastUpdate = empty($team[$this->lastUpdateDbField]) ? null : new DateTime($team[$this->lastUpdateDbField]);
+        return ($lastUpdate === null || $now->sub($this->updateInterval) > $lastUpdate);
     }
 
     /**
@@ -165,23 +181,23 @@ abstract class NuLigaHandlerBase
     /**
      * Registers a handler.
      *
-     * @param $tableType int NuLiga table type the handler handles
+     * @param $viewId int id of the NuLiga team view which the handler is responsible for
      * @param $handler NuLigaHandlerBase handler instance
      */
-    public static function registerHandler($tableType, $handler)
+    public static function registerHandler($viewId, $handler)
     {
-        self::$handlers[$tableType] = $handler;
+        self::$handlers[$viewId] = $handler;
     }
 
     /**
-     * Gets the handler which is responsible for a certain NuLiga table type.
+     * Gets the handler which is responsible for a certain NuLiga team view.
      *
-     * @param $tableType int NuLiga table type
-     * @return NuLigaHandlerBase|null handler instance or null if table type unknown
+     * @param $viewId int NuLiga team view id
+     * @return NuLigaHandlerBase|null handler instance or null if view id is unknown
      */
-    public static function getHandler($tableType)
+    public static function getHandler($viewId)
     {
-        return array_key_exists($tableType, self::$handlers) ? self::$handlers[$tableType] : null;
+        return array_key_exists($viewId, self::$handlers) ? self::$handlers[$viewId] : null;
     }
 
     /**

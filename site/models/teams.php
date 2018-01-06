@@ -6,6 +6,13 @@
  * Time: 13:56
  */
 
+/**
+ * Model for NuLiga team lists.
+ *
+ * @package     Joomla.Site
+ * @subpackage  com_nuliga
+ * @since  0.0.30
+ */
 class NuLigaModelTeams extends JModelList
 {
     /**

@@ -49,11 +49,11 @@ class NuLigaModelLeagueteams extends JModelList
         $query->select('*')
             ->from('#__nuliga_leagueteams AS t');
 
-        // filter: NuLiga table id
-        $tableId = $this->getState('filter.table_id');
-        if (is_numeric($tableId))
+        // filter: NuLiga team
+        $teamId = $this->getState('filter.team_id');
+        if (is_numeric($teamId))
         {
-            $query->where('t.tabid = ' . (int) $tableId);
+            $query->where('t.teamid = ' . (int) $teamId);
         }
 
         // filter: published state

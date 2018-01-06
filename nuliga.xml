@@ -16,7 +16,7 @@
     </updateservers>
 
     <!--  The version string is recorded in the components table -->
-    <version>0.0.30</version>
+    <version>0.0.40</version>
 
     <!-- The description is optional and defaults to the name -->
     <description>COM_NULIGA_DESCRIPTION</description>
@@ -48,7 +48,6 @@
 
         <folder>language</folder>
         <folder>models</folder>
-        <folder>views</folder>
     </files>
 
     <languages folder="site/language">
@@ -67,10 +66,9 @@
         <!-- Administration Menu Section -->
         <menu link='index.php?option=com_nuliga'>COM_NULIGA_MENU</menu>
         <submenu>
-          <menu img='media/com_nuliga/images/Tux-16x16.png'
-                link='option=com_nuliga&amp;view=teams' view='teams'>COM_NULIGA_MENU_TEAMS</menu>
-          <menu img='media/com_nuliga/images/Tux-16x16.png'
-                link='option=com_nuliga&amp;view=tables' view='tables'>COM_NULIGA_MENU_TABLES</menu>
+          <menu link='option=com_nuliga&amp;view=teams' view='teams'>COM_NULIGA_MENU_TEAMS</menu>
+          <menu link='option=com_nuliga&amp;view=leagueteams' view='leagueteams'>COM_NULIGA_MENU_LEAGUETEAMS</menu>
+          <menu link='option=com_nuliga&amp;view=matches' view='matches'>COM_NULIGA_MENU_MATCHES</menu>
         </submenu>
         <!-- Administration Main File Copy Section -->
         <!-- Note the folder attribute: This attribute describes the folder

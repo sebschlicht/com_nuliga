@@ -52,11 +52,11 @@ class NuLigaModelMatches extends JModelList
         $query->select('*')
             ->from('#__nuliga_matches AS m');
 
-        // filter: NuLiga table id
-        $tableId = $this->getState('filter.table_id');
-        if (is_numeric($tableId))
+        // filter: NuLiga team id
+        $teamId = $this->getState('filter.team_id');
+        if (is_numeric($teamId))
         {
-            $query->where('m.tabid = ' . (int) $tableId);
+            $query->where('m.teamid = ' . (int) $teamId);
         }
 
         // filter: published state
