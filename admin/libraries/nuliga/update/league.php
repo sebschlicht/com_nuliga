@@ -37,7 +37,6 @@ class NuLigaUpdateLeague extends NuLigaUpdateBase
     
     protected function validate($item)
     {
-        // TODO always? true
-        return false;
+        return true;
     }
 }

@@ -27,6 +27,16 @@
                 default=""
         />
         <field
+                name="last_update_portrait"
+                type="text"
+                label="COM_NULIGA_TEAM_FIELD_LASTUPDATEPORTRAIT_LABEL"
+                description="COM_NULIGA_TEAM_FIELD_LASTUPDATEPORTRAIT_DESC"
+                size="40"
+                class="inputbox"
+                required="false"
+                readonly="true"
+        />
+        <field
                 name="league"
                 type="text"
                 label="COM_NULIGA_TEAM_FIELD_LEAGUE_LABEL"

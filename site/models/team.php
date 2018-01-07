@@ -75,7 +75,7 @@ class NuLigaModelTeam extends JModelItem
         {
             if ($handler->isUpdateRequired($this->_team))
             {
-                echo '<script>console.log("NuLiga update necessary...");</script>';
+                echo "<script>console.log('NuLiga update necessary for view #$viewId...');</script>";
                 if (!$handler->update($this->_team))
                 {
                     // error: update failed
@@ -85,6 +85,10 @@ class NuLigaModelTeam extends JModelItem
                 {
                     echo '<script>console.log("NuLiga update successful.");</script>';
                 } 
+            }
+            else
+            {
+                echo "<script>console.log('NuLiga update has been skipped for view #$viewId.');</script>";
             }
         }
         else
