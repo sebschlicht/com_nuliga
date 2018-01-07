@@ -57,5 +57,15 @@
                 required="false"
                 default=""
         />
+        <field
+                name="last_update_league"
+                type="text"
+                label="COM_NULIGA_TEAM_FIELD_LASTUPDATELEAGUE_LABEL"
+                description="COM_NULIGA_TEAM_FIELD_LASTUPDATELEAGUE_DESC"
+                size="40"
+                class="inputbox"
+                required="false"
+                readonly="true"
+        />
     </fieldset>
 </form>
