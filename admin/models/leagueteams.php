@@ -2,18 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: sebschlicht
- * Date: 05.01.18
- * Time: 13:56
+ * Date: 07.01.18
+ * Time: 13:40
  */
 
+// No direct access to this file
+defined('_JEXEC') or die('Restricted access');
+
 /**
- * Model for NuLiga team lists.
+ * Backend model for the NuLiga league team list.
  *
- * @package     Joomla.Site
+ * @package     Joomla.Administrator
  * @subpackage  com_nuliga
- * @since  0.0.30
+ * @since  0.0.42
  */
-class NuLigaModelTeams extends JModelList
+class NuLigaModelLeagueteams extends JModelList
 {
     /**
      * Constructor.
@@ -28,7 +31,9 @@ class NuLigaModelTeams extends JModelList
         if (empty($config['filter_fields']))
         {
             $config['filter_fields'] = array(
-                'published'
+                'teamid',
+                'rank',
+                'name'
             );
         }
 
@@ -36,46 +41,37 @@ class NuLigaModelTeams extends JModelList
     }
 
     /**
-     * Get the master query for retrieving a list of teams subject to the model state.
+     * Method to build an SQL query to load the list data.
      *
-     * @return  JDatabaseQuery
-     *
-     * @since   1.6
+     * @return      string  SQL query
      */
     protected function getListQuery()
     {
-        // Get the current user for authorisation checks
-        $user = JFactory::getUser();
-
-        // Create a new query object.
-        $db = $this->getDbo();
+        // initialize variables
+        $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
 
-        // select all fields of teams
+        // select all NuLiga league teams
         $query->select('*')
-            ->from('#__nuliga_teams AS t');
-        
+            ->from($db->quoteName('#__nuliga_leagueteams'));
+
         // filter: like / search
         $search = $this->getState('filter.search');
         if (!empty($search))
         {
             $like = $db->quote('%' . $search . '%');
-            $query->where('title LIKE ' . $like);
+            $query->where('name LIKE ' . $like);
+        }
+        
+        // filter: NuLiga team
+        $teamId = $this->getState('filter.team_id');
+        if (is_numeric($teamId))
+        {
+            $query->where('teamid = ' . (int) $teamId);
         }
 
-        // filter: published state
-        $published = $this->getState('filter.published');
-        if (is_numeric($published))
-        {
-            $query->where('t.published = ' . (int) $published);
-        }
-        elseif ($published === '')
-        {
-            $query->where('(t.published IN (0, 1))');
-        }
-
-        // ordering
-        $orderCol	= $this->state->get('list.ordering', 't.title');
+        // order
+        $orderCol	= $this->state->get('list.ordering', 'rank');
         $orderDirn 	= $this->state->get('list.direction', 'asc');
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
 

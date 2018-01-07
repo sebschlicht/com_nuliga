@@ -54,7 +54,7 @@ class NuLigaModelTeams extends JModelList
         $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
 
-        // select all NuLiga tables
+        // select all NuLiga teams
         $query->select('*')
             ->from($db->quoteName('#__nuliga_teams'));
 
