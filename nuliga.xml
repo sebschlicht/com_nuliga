@@ -4,15 +4,15 @@
     <name>COM_NULIGA</name>
 
     <!-- The following elements are optional and free of formatting constraints -->
-    <creationDate>Nov 2017</creationDate>
     <author>Sebastian Schlicht</author>
+    <creationDate>Nov 2017</creationDate>
+    <copyright>Copyright (C) 2018 Sebastian Schlicht. All rights reserved.</copyright>
+    <license>MIT License; see LICENSE</license>
     <authorEmail>sebastian@jablab.de</authorEmail>
     <authorUrl>http://www.jablab.de</authorUrl>
-    <copyright>Copyright 2017 JabLab GbR. All rights reserved.</copyright>
-    <!-- <license>License Info</license> -->
 
     <updateservers>
-        <server type="extension" name="NuLiga Extension Updates">http://dev.jablab.de/updates/com_nuliga/extension.xml</server>
+        <server type="extension" name="NuLiga Component Updates">http://dev.jablab.de/updates/com_nuliga/extension.xml</server>
     </updateservers>
 
     <!--  The version string is recorded in the components table -->
