@@ -16,6 +16,15 @@
                 default=""
         />
         <field
+                name="label"
+                type="text"
+                label="COM_NULIGA_TEAM_FIELD_LABEL_LABEL"
+                description="COM_NULIGA_TEAM_FIELD_LABEL_DESC"
+                size="40"
+                class="inputbox"
+                default=""
+        />
+        <field
                 name="urlPortrait"
                 type="text"
                 label="COM_NULIGA_TEAM_FIELD_URLPORTRAIT_LABEL"

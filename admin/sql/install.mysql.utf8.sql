@@ -47,8 +47,9 @@ CREATE TABLE `#__nuliga_matches` (
 DROP TABLE IF EXISTS `#__nuliga_teams`;
 
 CREATE TABLE `#__nuliga_teams` (
-  `id`       INT(11)     NOT NULL AUTO_INCREMENT,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(64) NOT NULL,
+  `label` VARCHAR(64),
   `urlPortrait` VARCHAR(255),
   `last_update_portrait` DATETIME,
   `league` VARCHAR(255) NOT NULL,
@@ -60,4 +61,3 @@ CREATE TABLE `#__nuliga_teams` (
   ENGINE =MyISAM
   AUTO_INCREMENT =0
   DEFAULT CHARSET =utf8;
-

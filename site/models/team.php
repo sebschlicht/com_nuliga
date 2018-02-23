@@ -157,4 +157,14 @@ class NuLigaModelTeam extends JModelItem
             return false;
         }
     }
+
+    /**
+     * Returns the currently loaded NuLiga team, if any.
+     * 
+     * @return JTable|null previously loaded NuLiga team or null if none has been loaded yet
+     */
+    public function getTeam()
+    {
+        return $this->_team;
+    }
 }
