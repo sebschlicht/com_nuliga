@@ -11,7 +11,7 @@ This component is licensed under the MIT License; see [LICENSE](https://github.c
 
 ## Installation
 
-Simply download the latest [release](releases) and install the package via the extension manager.
+Simply download the latest [release](https://github.com/sebschlicht/com_nuliga/releases) and install the package via the extension manager.
 The extension supports the update manager, thus you will be notified about updates by your Joomla! instance automatically.
 
 ## Usage
