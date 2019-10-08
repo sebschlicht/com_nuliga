@@ -5,14 +5,14 @@
 
     <!-- The following elements are optional and free of formatting constraints -->
     <author>Sebastian Schlicht</author>
-    <creationDate>Nov 2017</creationDate>
-    <copyright>Copyright (C) 2018 Sebastian Schlicht. All rights reserved.</copyright>
+    <creationDate>Oct 2019</creationDate>
+    <copyright>Copyright (C) 2019 Sebastian Schlicht. All rights reserved.</copyright>
     <license>MIT License; see LICENSE</license>
     <authorEmail>sebastian@jablab.de</authorEmail>
-    <authorUrl>http://www.jablab.de</authorUrl>
+    <authorUrl>https://www.jablab.de</authorUrl>
 
     <updateservers>
-        <server type="extension" name="NuLiga Component Updates">http://dev.jablab.de/updates/com_nuliga/extension.xml</server>
+        <server type="extension" name="NuLiga Component Updates">https://dev.jablab.de/updates/com_nuliga/extension.xml</server>
     </updateservers>
 
     <!--  The version string is recorded in the components table -->
