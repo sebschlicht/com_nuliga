@@ -12,7 +12,7 @@
     <authorUrl>https://www.jablab.de</authorUrl>
 
     <updateservers>
-        <server type="extension" name="NuLiga Component Updates">https://dev.jablab.de/updates/com_nuliga/extension.xml</server>
+        <server type="extension" name="NuLiga Component Updates">https://updates.jablab.de/joomla/com_nuliga/extension.xml</server>
     </updateservers>
 
     <!--  The version string is recorded in the components table -->
