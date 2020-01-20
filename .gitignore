@@ -1,6 +1,3 @@
 # generated files
 /.idea/
 com_nuliga*.zip
-
-# scripts
-/mkzip.sh
